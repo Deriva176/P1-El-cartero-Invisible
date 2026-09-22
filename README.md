@@ -1,8 +1,8 @@
-📬 El Cartero Invisible — Setmana 1: Obrim l'Oficina de Correus
+El Cartero Invisible — Setmana 1: Obrim l'Oficina de Correus
 
 Benvingut/da al projecte El Cartero Invisible. Durant aquesta primera fase muntem els fonaments del projecte: configurem l'entorn de treball, aixequem el servidor amb FastAPI, dissenyem la façana semàntica amb HTML/CSS i donem vida a la interacció amb JavaScript.
 
-🏛️ La Metàfora del Projecte
+La Metàfora del Projecte
 
 Una oficina de correus necessita tres elements bàsics abans d'obrir al públic:
 
@@ -12,7 +12,7 @@ El Personal de Finestreta (frontend/script.js): El sistema nerviós que escolta 
 
 El Carter i el Taulell d'Atenció (backend/ amb FastAPI + Uvicorn): El servidor que rep les peticions externes, les processa i respon amb cartes (JSON).
 
-📐 Arquitectura Client-Servidor
+·Arquitectura Client-Servidor
 
 [ Client: Navegador Web ]
    │
@@ -27,7 +27,7 @@ El Carter i el Taulell d'Atenció (backend/ amb FastAPI + Uvicorn): El servidor 
    └── Endpoint GET / ──► Retorna: {"missatge": "Hola, món!"}
 
 
-📁 Estructura del Projecte
+·Estructura del Projecte
 
 cartero-invisible/
 ├── backend/
