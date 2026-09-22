@@ -27,19 +27,24 @@ El Carter i el Taulell d'Atenció (backend/ amb FastAPI + Uvicorn): El servidor 
    └── Endpoint GET / ──► Retorna: {"missatge": "Hola, món!"}
 
 
-·Estructura del Projecte
+## Estructura del Projecte
 
+```text
 cartero-invisible/
+│
 ├── backend/
-│   ├── .venv/               # Entorn virtual de Python
-│   ├── tests/
-│   │   └── test_main.py     # Tests asíncrons amb pytest i httpx
-│   ├── main.py              # Aplicació FastAPI i primer endpoint
-│   └── requirements.txt     # Dependències de Python
+│   ├── .venv/                  # Entorn virtual de Python
+│   ├── main.py                 # Aplicació FastAPI i primer endpoint
+│   ├── requirements.txt        # Dependències de Python
+│   │
+│   └── tests/
+│       └── test_main.py        # Tests asíncrons amb pytest i httpx
+│
 ├── frontend/
-│   ├── index.html           # Estructura semàntica i botó de salutació
-│   ├── style.css            # Estils bàsics i pseudoclasses
-│   ├── script.js            # Lògica d'esdeveniments i salutació
-│   ├── saludar.test.js      # Test unitari Jest del client
-│   └── package.json         # Dependències i scripts de Node/Jest
+│   ├── index.html              # Estructura semàntica i botó de salutació
+│   ├── style.css               # Estils bàsics i pseudoclasses
+│   ├── script.js               # Lògica d'esdeveniments i salutació
+│   ├── saludar.test.js         # Test unitari Jest del client
+│   └── package.json            # Dependències i scripts de Node/Jest
+│
 └── README.md
