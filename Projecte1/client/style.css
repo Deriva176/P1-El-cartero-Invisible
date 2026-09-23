@@ -16,5 +16,21 @@ section {
 }
 
 
-h1:hover { color: #e74c3c; }              /* canvia de color en passar-hi el ratolí */
-section:first-child { border-left: 4px solid #2c3e50; }
+h1:hover {
+   color: #e74c3c; 
+}
+              /* canvia de color en passar-hi el ratolí */
+section:first-child {
+   border-left: 4px solid #2c3e50; 
+}
+
+.carta {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 8px 0;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+    
