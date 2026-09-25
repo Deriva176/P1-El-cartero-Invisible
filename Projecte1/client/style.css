@@ -1,36 +1,125 @@
+/* Aplica el border-box a todos els elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Cos de la pàgina */
 body {
   background-color: #f4f1ea;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  padding: 20px;
+  color: #2c3e50;
 }
 
+/* Capçalera */
+header {
+  max-width: 1000px;
+  margin: 20px auto 30px;
+  text-align: center;
+}
+
+/* Títol principal */
 h1 {
   color: #2c3e50;
   font-size: 2.5rem;
+  margin: 0;
 }
 
+/* Efecte en passar el ratolí pel títol */
+h1:hover {
+  color: #e74c3c;
+}
+
+/* Contenidor principal */
+.contenidorPrincipal {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+
+
+/* Text de benvinguda */
+.info {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  color: #2c3e50;
+}
+
+/* Seccions */
 section {
   margin: 20px 0;
   padding: 16px;
 }
 
-
-h1:hover {
-   color: #e74c3c; 
-}
-              /* canvia de color en passar-hi el ratolí */
+/* Primera secció */
 section:first-child {
-   border-left: 4px solid #2c3e50; 
+  border-left: 4px solid #2c3e50;
 }
 
+/* Contenidor de cartes */
+#contenidorCartes {
+  width: 100%;
+}
+
+/* Carta */
 .carta {
   border: 1px solid #ccc;
-  padding: 16px;
-  margin: 8px 0;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 2rem;
+  margin: 1em auto;
+  width: 95%;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+/* Títol de la carta */
+.carta h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+/* Text de la carta */
+.carta p {
+  margin-bottom: 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Efecte en passar el ratolí per la carta */
+.carta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 40px 30px rgba(0, 0, 0, 0.16);
+}
+
+/* Cartes pendents */
+#contenidorCartes > p {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+#btnSaluda {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #159e4a;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Peu de pàgina */
+footer {
+  max-width: 1000px;
+  margin: 50px auto 20px;
+  text-align: center;
+  color: #156e9e;
+  
+}
     
