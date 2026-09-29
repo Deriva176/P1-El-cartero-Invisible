@@ -2,6 +2,69 @@ function saluda() {
   alert("Hola, món!");
 }
 
+
+// Array con les 3 cartes simulades
+const cartesSimulades = [
+    {
+        id: 1,
+        remitent: "Carter 1",
+        contingut: "Hola! Aquesta és la primera carta."
+    },
+    {
+        id: 2,
+        remitent: "Carter 2",
+        contingut: "Aquesta és la segona carta."
+    },
+    {
+        id: 3,
+        remitent: "Carter 3",
+        contingut: "I aquesta és la tercera carta."
+    }
+];
+
+
+// Funció per mostrar les cartes
+function renderitzarCartes(cartes) {
+
+    const contenidor = document.querySelector("#contenidorCartes");
+
+    // Buidem el contenidor
+    contenidor.innerHTML = "";
+
+    // Recorrem totes les cartes
+    cartes.forEach(carta => {
+
+        // Creem el div principal
+        const divCarta = document.createElement("div");
+        divCarta.classList.add("carta");
+
+        // Creem el h3 amb el remitent
+        const h3 = document.createElement("h3");
+        h3.textContent = carta.remitent;
+
+        // Creem el p amb el contingut
+        const p = document.createElement("p");
+        p.textContent = carta.contingut;
+
+        // Creem el span amb l'ID
+        const span = document.createElement("span");
+        span.textContent = "ID: " + carta.id;
+        span.setAttribute("data-id", carta.id);
+
+        // Afegim els elements al div
+        divCarta.appendChild(h3);
+        divCarta.appendChild(p);
+        divCarta.appendChild(span);
+
+        // Afegim la carta al contenidor
+        contenidor.appendChild(divCarta);
+    });
+}
+
+
+// Esperem que el HTML estigui carregat
+document.addEventListener("DOMContentLoaded", () => {
+
 const boto = document.getElementById("btnSaluda");
 boto.addEventListener("click", saluda);
 
@@ -16,3 +79,6 @@ contenidor.innerHTML += "<p>Cartes pendents: 0</p>";
 const info = document.querySelector(".info");
 info.style.color = "#2c3e50";
 
+// Mostrem les cartes
+    renderitzarCartes(cartesSimulades);
+});
