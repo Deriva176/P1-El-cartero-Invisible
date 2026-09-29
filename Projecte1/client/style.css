@@ -70,7 +70,7 @@ section:first-child {
   margin: 1em auto;
   width: 95%;
   border-radius: 12px;
-  background-color: #ffffff;
+  background-color: #b7daf2;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   transition: transform 0.2s, box-shadow 0.2s;
 }
