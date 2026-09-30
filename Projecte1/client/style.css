@@ -102,6 +102,16 @@ section:first-child {
   margin-top: 50px;
 }
 
+#btnAfegir {
+    background-color: #3498db;
+    color: rgb(255, 251, 183);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
 #btnSaluda {
   display: block;
   margin: 20px auto;

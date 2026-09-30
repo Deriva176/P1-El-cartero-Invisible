@@ -80,8 +80,7 @@ contenidor.innerHTML += "<p>Cartes pendents: 0</p>";
 const info = document.querySelector(".info");
 info.style.color = "#2c3e50";
 
-// Mostrem les cartes
-    renderitzarCartes(cartesSimulades);
+renderitzarCartes(cartesSimulades);
 
 document.querySelector("#btnAfegir").addEventListener("click", () => {
 

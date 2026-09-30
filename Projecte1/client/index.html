@@ -1,57 +1,56 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>El Cartero Invisible</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <script src="script.js" defer></script>
-  <script src="test.js" defer></script>
-  
+
   <header>
-<h1 id="titolPrincipal">El Cartero Invisible</h1>
+    <h1 id="titolPrincipal">El Cartero Invisible</h1>
   </header>
 
-
-<main class="contenidorPrincipal">
-
-  <button id="btnAfegir">Afegir carta de prova</button>
+  <main class="contenidorPrincipal">
 
     <p class="info">Benvingut al teu buzón virtual</p>
-<div id="contenidorCartes ">
-<div class="carta">
-    <h3>De: Maria</h3>
-    <p>Hola, ahmuar com estàs? T'escric des del passat.</p>
-</div>
-</div>
 
+    <!-- Aquí JavaScript generará las cartas -->
+    <div id="contenidorCartes">
+    </div>
 
-<div class="contenidorBoton">
-    <button id="btnSaluda">Saluda'm!</button>
-</div>
+    <!-- Botó Saluda -->
+    <div class="contenidorBoton">
+      <button id="btnSaluda">Saluda'm!</button>
+    </div>
 
-<div class="contenidorBoton"></div>  
+    <!-- Botó per afegir una carta -->
+    <div class="contenidorBoton">
+      <button id="btnAfegir">Afegir carta de prova</button>
+    </div>
 
-<button id="btnAfegir">Afegir carta de prova</button>
- 
-<section id="llistatCartes">
-  <!-- de moment buit: aquí aniran les cartes -->
-</section>
-  
-<section id="formulariCarta">
-    <!-- de moment buit: aquí anirà el formulari -->
-</section>
+    <section id="llistatCartes">
+      <!-- de moment buit -->
+    </section>
 
-</main>
+    <section id="formulariCarta">
+      <!-- de moment buit -->
+    </section>
 
-<footer>
-  <marquee behavior="scroll" direction="left">
-  <p>&copy; 2026 El Cartero Invisible</p>
-  </marquee>
-</footer>
+  </main>
+
+  <footer>
+    <marquee behavior="scroll" direction="left">
+      <p>&copy; 2026 El Cartero Invisible</p>
+    </marquee>
+  </footer>
 
 </body>
+
 </html>
