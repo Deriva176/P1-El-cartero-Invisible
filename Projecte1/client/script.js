@@ -65,6 +65,7 @@ function renderitzarCartes(cartes) {
 // Esperem que el HTML estigui carregat
 document.addEventListener("DOMContentLoaded", () => {
 
+
 const boto = document.getElementById("btnSaluda");
 boto.addEventListener("click", saluda);
 
@@ -81,4 +82,15 @@ info.style.color = "#2c3e50";
 
 // Mostrem les cartes
     renderitzarCartes(cartesSimulades);
+
+document.querySelector("#btnAfegir").addEventListener("click", () => {
+
+        cartesSimulades.push({
+            id: cartesSimulades.length + 1,
+            remitent: "Carter " + (cartesSimulades.length + 1),
+            contingut: "Aquesta carta s'acaba de crear dinàmicament!"
+        });
+
+        renderitzarCartes(cartesSimulades);
+    });
 });
