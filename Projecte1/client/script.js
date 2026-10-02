@@ -1,5 +1,5 @@
 function saluda() {
-  alert("Hola, món!");
+    alert("Hola, món!");
 }
 
 
@@ -40,7 +40,7 @@ function renderitzarCartes(cartes) {
 
         // Creem el h3 amb el remitent
         const h3 = document.createElement("h3");
-        h3.textContent = carta.remitent;
+        h3.textContent = "De: " + carta.remitent;
 
         // Creem el p amb el contingut
         const p = document.createElement("p");
@@ -62,27 +62,36 @@ function renderitzarCartes(cartes) {
 }
 
 
-// Esperem que el HTML estigui carregat
-document.addEventListener("DOMContentLoaded", () => {
+// Funció d'inicialització
+function inicialitzar() {
+
+    // Botó de saludar
+    const boto = document.getElementById("btnSaluda");
+    boto.addEventListener("click", saluda);
 
 
-const boto = document.getElementById("btnSaluda");
-boto.addEventListener("click", saluda);
+    // Títol principal
+    const titol = document.querySelector("#titolPrincipal");
+    titol.textContent = "📮 El Cartero Invisible – Setmana 2";
+    titol.setAttribute("data-role", "banner");
 
-// frontend/script.js — la manipulació d'aquesta setmana
-const titol = document.querySelector("#titolPrincipal");
-titol.textContent = "📮 El Cartero Invisible – Setmana 2";
-titol.setAttribute("data-role", "banner");
 
-const contenidor = document.querySelector("#contenidorCartes");
-contenidor.innerHTML += "<p>Cartes pendents: 0</p>";
+    // Contenidor de cartes
+    const contenidor = document.querySelector("#contenidorCartes");
+    contenidor.innerHTML += "<p>Cartes pendents: 0</p>";
 
-const info = document.querySelector(".info");
-info.style.color = "#2c3e50";
 
-renderitzarCartes(cartesSimulades);
+    // Informació
+    const info = document.querySelector(".info");
+    info.style.color = "#2c3e50";
 
-document.querySelector("#btnAfegir").addEventListener("click", () => {
+
+    // Mostrar les cartes inicials
+    renderitzarCartes(cartesSimulades);
+
+
+    // Botó per afegir cartes
+    document.querySelector("#btnAfegir").addEventListener("click", () => {
 
         cartesSimulades.push({
             id: cartesSimulades.length + 1,
@@ -92,4 +101,15 @@ document.querySelector("#btnAfegir").addEventListener("click", () => {
 
         renderitzarCartes(cartesSimulades);
     });
-});
+}
+
+
+// Executa-ho només si estem al navegador
+// (evitant problemes a Node/Jest)
+if (typeof document !== "undefined") {
+    document.addEventListener("DOMContentLoaded", inicialitzar);
+}
+
+
+// Exporta el que necessitem per fer els tests
+export { renderitzarCartes };
