@@ -85,6 +85,10 @@ function inicialitzar() {
     const info = document.querySelector(".info");
     info.style.color = "#2c3e50";
 
+    const buzon = document.getElementById("buzon");
+    buzon.addEventListener("click", () => {
+    alert("📬 Has abierto el buzón!");
+    });
 
     // Mostrar les cartes inicials
     renderitzarCartes(cartesSimulades);

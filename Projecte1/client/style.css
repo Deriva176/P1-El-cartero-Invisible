@@ -112,6 +112,21 @@ section:first-child {
     font-size: 16px;
 }
 
+#buzon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #c9dfaa;
+    color: white;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 100;
+}
+#buzon:hover {
+    background: #9eda6c;
+}
+
 #btnSaluda {
   display: block;
   margin: 20px auto;
