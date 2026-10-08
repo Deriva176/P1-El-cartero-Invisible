@@ -5,7 +5,7 @@ let nom = "Pepe";
 let edat = 30;
 
 // Array con les 3 cartes simulades
-const cartesSimulades = [
+let cartesSimulades = [
     {
         id: 1,
         remitent: "Carter 1",
@@ -64,10 +64,19 @@ function renderitzarCartes(cartes) {
         span.textContent = "ID: " + carta.id;
         span.setAttribute("data-id", carta.id);
 
+        //Creem el botó d'eliminar
+        const btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "Eliminar";
+        btnEliminar.className = "btn-eliminar";
+        btnEliminar.dataset.id = carta.id;
+
+        // Afegim l'esdeveniment al botó d'eliminar
         // Afegim els elements al div
         divCarta.appendChild(h3);
         divCarta.appendChild(p);
         divCarta.appendChild(span);
+        divCarta.appendChild(btnEliminar);
+
 
         // Afegim la carta al contenidor
         contenidor.appendChild(divCarta);
@@ -98,6 +107,7 @@ function inicialitzar() {
     const info = document.querySelector(".info");
     info.style.color = "#2c3e50";
 
+    // Buzón
     const buzon = document.getElementById("buzon");
     buzon.addEventListener("click", () => {
     alert("📬 Has abierto el buzón!");
@@ -117,8 +127,48 @@ function inicialitzar() {
         });
 
         renderitzarCartes(cartesSimulades);
+
+        const contenidorCartes = document.querySelector("#contenidorCartes");
+        contenidorCartes.addEventListener("click", (event) => {
+
+            if (event.target.classList.contains("btn-eliminar")) {
+                const id = Number(event.target.dataset.id);
+                cartesSimulades = cartesSimulades.filter(carta => carta.id !== id);
+                renderitzarCartes(cartesSimulades);
+}
     });
 }
+
+//FORMULARI DE CARTA
+const formCarta = document.querySelector("#formCarta");
+
+formCarta.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+
+    const remitent = document.querySelector("#remitent").value.trim();
+    const destinatari = document.querySelector("#destinatari").value.trim();
+    const contingut = document.querySelector("#contingut").value.trim();
+    const personatge = document.querySelector("#personatge").value.trim();
+
+    if (!remitent || !destinatari || !contingut) {
+        alert("Has d'omplir el remitent, destinatari i contingut.");
+        return;
+    }
+
+    cartesSimulades.push({
+        id: cartesSimulades.length + 1,
+        remitent: remitent,
+        destinatari: destinatari,
+        contingut: contingut,
+        personatge: personatge
+    });
+
+    renderitzarCartes(cartesSimulades);
+
+    formCarta.reset();
+});
+
 
 //////////////////////////
 // CODI                 //
