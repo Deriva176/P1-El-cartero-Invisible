@@ -30,7 +30,7 @@ cartes = [
 @app.post("/cartas", status_code=201)
 def crear_carta(carta: Carta):
 
-    nova_carta = carta.dict()
+    nova_carta = carta.model_dump()
 
     # Assignem un ID
     nova_carta["id"] = len(cartes) + 1

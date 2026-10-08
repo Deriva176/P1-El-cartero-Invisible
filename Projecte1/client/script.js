@@ -1,7 +1,8 @@
-function saluda() {
-    alert("Hola, món!");
-}
-
+//////////////////////////
+// VARIABLES GLOBALS    //
+//////////////////////////
+let nom = "Pepe";
+let edat = 30;
 
 // Array con les 3 cartes simulades
 const cartesSimulades = [
@@ -21,6 +22,18 @@ const cartesSimulades = [
         contingut: "I aquesta és la tercera carta."
     }
 ];
+
+
+//////////////////////////
+// FUNCIONS             //
+//////////////////////////
+
+
+function saluda() {
+    alert("Hola, món!");
+}
+
+
 
 
 // Funció per mostrar les cartes
@@ -106,6 +119,10 @@ function inicialitzar() {
         renderitzarCartes(cartesSimulades);
     });
 }
+
+//////////////////////////
+// CODI                 //
+//////////////////////////
 
 
 // Executa-ho només si estem al navegador
