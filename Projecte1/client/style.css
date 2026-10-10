@@ -121,7 +121,7 @@ section:first-child {
     padding: 16px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    z-index: 100;
+    z-index: 1000;
 }
 #buzon:hover {
     background: #9eda6c;
@@ -138,6 +138,83 @@ section:first-child {
   border-radius: 5px;
   cursor: pointer;
 }
+
+/* Botons centrats */
+.contenidorBoton {
+    text-align: center;
+    margin: 15px 0;
+}
+
+/* Títol de la taula */
+#seccioTaula h2 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+/* Contenidor de la taula */
+#seccioTaula {
+    margin-top: 25px;
+    padding: 16px;
+    overflow-x: auto;
+}
+
+/* Taula de cartes */
+#taulaCartes {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+/* Capçalera i cel·les */
+#taulaCartes th,
+#taulaCartes td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Capçalera de la taula */
+#taulaCartes th {
+    background-color: #34495e;
+    color: white;
+}
+
+/* Colors alterns de les files */
+#taulaCartes tbody tr:nth-child(even) {
+    background-color: #e8f2f8;
+}
+
+#taulaCartes tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* Efecte en passar el ratolí per una fila */
+#taulaCartes tbody tr:hover {
+    background-color: #d4e6f1;
+}
+
+/* Resum del contingut */
+.contingut-cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+}
+
+/* Botó d'eliminar de la taula */
+.btn-eliminar-taula {
+    background-color: #e74c3c;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-eliminar-taula:hover {
+    background-color: #c0392b;
+}
+
 
 /* Peu de pàgina */
 footer {

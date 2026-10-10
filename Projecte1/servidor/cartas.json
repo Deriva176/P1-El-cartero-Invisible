@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "remitent": "Maria",
+        "destinatari": "Joan",
+        "contingut": "Hola Joan!",
+        "personatge": "Einstein"
+    },
+    {
+        "id": 2,
+        "remitent": "Pau",
+        "destinatari": "Anna",
+        "contingut": "Com estàs?",
+        "personatge": "Newton"
+    },
+    {
+        "id": 3,
+        "remitent": "Laura",
+        "destinatari": "Marc",
+        "contingut": "Ens veiem demà!",
+        "personatge": "Einstein"
+    }
+]

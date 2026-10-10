@@ -111,7 +111,8 @@ function inicialitzar() {
     const buzon = document.getElementById("buzon");
     buzon.addEventListener("click", () => {
     alert("📬 Has abierto el buzón!");
-    });
+    })
+};
 
     // Mostrar les cartes inicials
     renderitzarCartes(cartesSimulades);
@@ -125,6 +126,7 @@ function inicialitzar() {
             remitent: "Carter " + (cartesSimulades.length + 1),
             contingut: "Aquesta carta s'acaba de crear dinàmicament!"
         });
+    });
 
         renderitzarCartes(cartesSimulades);
 
@@ -137,7 +139,7 @@ function inicialitzar() {
                 renderitzarCartes(cartesSimulades);
 }
     });
-}
+
 
 //FORMULARI DE CARTA
 const formCarta = document.querySelector("#formCarta");
@@ -183,4 +185,4 @@ if (typeof document !== "undefined") {
 
 
 // Exporta el que necessitem per fer els tests
-export { renderitzarCartes };
+export { renderitzarCartes }

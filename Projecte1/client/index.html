@@ -2,66 +2,119 @@
 <html lang="ca">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Cartero Invisible</title>
-
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Cartero Invisible</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <header>
+        <h1 id="titolPrincipal">El Cartero Invisible</h1>
+    </header>
 
-  <header>
-    <h1 id="titolPrincipal">El Cartero Invisible</h1>
-  </header>
+    <main class="contenidorPrincipal">
 
-  <main class="contenidorPrincipal">
+        <p class="info">Benvingut al teu buzón virtual</p>
 
-    <p class="info">Benvingut al teu buzón virtual</p>
+        <!-- Aquí JavaScript generará las cartas -->
+        <div id="contenidorCartes">
+        </div>
 
-    <!-- Aquí JavaScript generará las cartas -->
-    <div id="contenidorCartes">
-    </div>
+        <!-- Botó Saluda -->
+        <div class="contenidorBoton">
+            <button id="btnSaluda">Saluda'm!</button>
+        </div>
 
-    <!-- Botó Saluda -->
-    <div class="contenidorBoton">
-      <button id="btnSaluda">Saluda'm!</button>
-    </div>
-    
-    <!-- Buzón -->
-    <div 
-    <button id="buzon">📬</button> 
-    </div>
+        <!-- Buzón -->
+        <div>
+            <button id="buzon">📬</button>
+        </div>
 
-    <!-- Botó per afegir una carta -->
-    <div class="contenidorBoton">
-      <button id="btnAfegir">Afegir carta de prova</button>
-    </div>
+        <!-- Botó per afegir una carta -->
+        <div class="contenidorBoton">
+            <button id="btnAfegir">Afegir carta de prova</button>
+        </div>
 
-    <section id="llistatCartes">
-      <!-- de moment buit -->
-    </section>
+        <section id="llistatCartes">
+            <!-- de moment buit -->
+        </section>
 
-    <section id="formulariCarta">
-      <form id="formCarta">
-        <input type="text" id="remitent" placeholder="El teu nom" required>
-        <input type="text" id="destinatari" placeholder="A qui va dirigida?" required>
-        <textarea id="contingut" placeholder="Escriu la teva carta..." required></textarea>
-        <input type="text" id="personatge" placeholder="A quin personatge escrius? (ex: Einstein)">
-        <button type="submit">Enviar carta</button>
-  </form>
-    </section>
+        <!-- Formulari per crear una carta -->
+        <section id="formulariCarta">
+            <h2>Escriu una carta</h2>
 
-  </main>
+            <form id="formCarta">
+                <input
+                    type="text"
+                    id="remitent"
+                    placeholder="El teu nom"
+                    required
+                >
 
-  <footer>
-    <marquee behavior="scroll" direction="left">
-      <p>&copy; 2026 El Cartero Invisible</p>
-    </marquee>
-  </footer>
+                <input
+                    type="text"
+                    id="destinatari"
+                    placeholder="A qui va dirigida?"
+                    required
+                >
 
-  <script type="module" src="script.js" defer></script>
+                <textarea
+                    id="contingut"
+                    placeholder="Escriu la teva carta..."
+                    required
+                ></textarea>
+
+                <input
+                    type="text"
+                    id="personatge"
+                    placeholder="A quin personatge escrius? (ex: Einstein)"
+                >
+
+                <button type="submit">Enviar carta</button>
+            </form>
+        </section>
+
+        <!-- Botó per mostrar o amagar la taula -->
+        <div class="contenidorBoton">
+            <button id="btnMostrarTaula">Mostrar taula</button>
+        </div>
+
+        <!-- Taula de cartes, oculta inicialment -->
+        <section id="seccioTaula" style="display: none;">
+
+            <h2>📋 Llistat de cartes</h2>
+
+            <table id="taulaCartes">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Remitent</th>
+                        <th>Destinatari</th>
+                        <th>Contingut (resum)</th>
+                        <th>Accions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="cosTaula">
+                    <!-- JavaScript afegirà les cartes aquí -->
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <marquee behavior="scroll" direction="left">
+            <p>&copy; 2026 El Cartero Invisible</p>
+        </marquee>
+    </footer>
+
+    <script type="module" src="script.js" defer></script>
 
 </body>
 
