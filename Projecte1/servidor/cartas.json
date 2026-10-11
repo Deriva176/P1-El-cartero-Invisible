@@ -1,12 +1,5 @@
 [
     {
-        "id": 1,
-        "remitent": "Maria",
-        "destinatari": "Joan",
-        "contingut": "Hola Joan!",
-        "personatge": "Einstein"
-    },
-    {
         "id": 2,
         "remitent": "Pau",
         "destinatari": "Anna",
@@ -19,5 +12,19 @@
         "destinatari": "Marc",
         "contingut": "Ens veiem demà!",
         "personatge": "Einstein"
+    },
+    {
+        "remitent": "Pau",
+        "destinatari": "Anna",
+        "contingut": "Hola Anna!",
+        "personatge": "Einstein",
+        "id": 4
+    },
+    {
+        "remitent": "Test",
+        "destinatari": "Test",
+        "contingut": "Test",
+        "personatge": "Test",
+        "id": 5
     }
 ]
