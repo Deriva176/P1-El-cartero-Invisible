@@ -1,13 +1,13 @@
 [
     {
-        "id": 2,
+        "id": 1,
         "remitent": "Pau",
         "destinatari": "Anna",
         "contingut": "Com estàs?",
         "personatge": "Newton"
     },
     {
-        "id": 3,
+        "id": 2,
         "remitent": "Laura",
         "destinatari": "Marc",
         "contingut": "Ens veiem demà!",
@@ -18,13 +18,13 @@
         "destinatari": "Anna",
         "contingut": "Hola Anna!",
         "personatge": "Einstein",
-        "id": 4
+        "id": 3
     },
     {
-        "remitent": "Test",
-        "destinatari": "Test",
-        "contingut": "Test",
-        "personatge": "Test",
-        "id": 5
+        "remitent": "Fouzi",
+        "destinatari": "Derick",
+        "contingut": "hola",
+        "personatge": "NO",
+        "id": 4
     }
 ]

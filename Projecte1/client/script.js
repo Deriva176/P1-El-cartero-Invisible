@@ -2,7 +2,7 @@
 // VARIABLES GLOBALS    //
 //////////////////////////
 
-let nom = "Pepe";
+let nom = "Derick";
 let edat = 30;
 
 // Array amb les 3 cartes simulades
@@ -30,7 +30,7 @@ let cartesSimulades = [
 //////////////////////////
 
 function saluda() {
-    alert("Hola, Kenai!");
+    alert("Hola, Derick!");
 }
 
 
