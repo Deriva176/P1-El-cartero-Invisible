@@ -80,31 +80,28 @@ async def test_create_carta_invalid():
 # TEST 6: Persistència de les cartes al fitxer JSON
 @pytest.mark.asyncio
 async def test_persistencia_post():
-    # Llegim les cartes abans de crear-ne una
-    with open("cartas.json", "r", encoding="utf-8") as f:
+    with open("cartas.json", "r") as f:
         dades_abans = json.load(f)
 
-    async with AsyncClient(
-        transport=ASGITransport(app=app),
-        base_url="http://test"
-    ) as ac:
-        payload = {
-            "remitent": "Test",
-            "destinatari": "Test",
-            "contingut": "Test",
-            "personatge": "Test"
-        }
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+        payload = {"remitent": "Test", "destinatari": "Test", "contingut": "Test", "personatge": "Test"}
+        await ac.post("/cartas", json=payload)
 
-        response = await ac.post("/cartas", json=payload)
-
-        assert response.status_code == 201
-
-    # Llegim les cartes després de crear-ne una
-    with open("cartas.json", "r", encoding="utf-8") as f:
+    with open("cartas.json", "r") as f:
         dades_despres = json.load(f)
 
-    # Comprovem que la carta s'ha guardat al fitxer
     assert len(dades_despres) == len(dades_abans) + 1
+
+@pytest.mark.asyncio
+async def test_delete_carta():
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+        response = await ac.delete("/cartas/1")
+        assert response.status_code == 200
+
+    with open("cartas.json", "r") as f:
+        dades = json.load(f)
+    assert not any(c["id"] == 1 for c in dades)
+
 
 
 # TEST 7: Eliminació d'una carta
