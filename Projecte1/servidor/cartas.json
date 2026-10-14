@@ -1,37 +1,86 @@
 [
     {
+        "id": 1,
+        "remitent": "Maria",
+        "destinatari": "Joan",
+        "contingut": "Hola Joan!",
+        "personatge": "Einstein"
+    },
+    {
         "id": 2,
+        "remitent": "Pau",
+        "destinatari": "Anna",
+        "contingut": "Com estàs?",
+        "personatge": "Newton"
+    },
+    {
+        "id": 3,
         "remitent": "Laura",
         "destinatari": "Marc",
         "contingut": "Ens veiem demà!",
         "personatge": "Einstein"
     },
     {
-        "remitent": "Pau",
-        "destinatari": "Anna",
-        "contingut": "Hola Anna!",
-        "personatge": "Einstein",
-        "id": 3
-    },
-    {
-        "remitent": "Fouzi",
-        "destinatari": "Derick",
-        "contingut": "hola",
-        "personatge": "NO",
-        "id": 4
-    },
-    {
-        "remitent": "Pau",
-        "destinatari": "Anna",
-        "contingut": "Hola Anna!",
-        "personatge": "Einstein",
-        "id": 5
+        "id": 4,
+        "remitent": "Test",
+        "destinatari": "Test",
+        "contingut": "Test",
+        "personatge": "Test"
     },
     {
         "remitent": "Test",
         "destinatari": "Test",
         "contingut": "Test",
         "personatge": "Test",
+        "id": 5
+    },
+    {
+        "remitent": "Pau",
+        "destinatari": "Anna",
+        "contingut": "Hola Anna!",
+        "personatge": "Einstein",
         "id": 6
+    },
+    {
+        "remitent": "Test",
+        "destinatari": "Test",
+        "contingut": "Test",
+        "personatge": "Test",
+        "id": 7
+    },
+    {
+        "remitent": "Pau",
+        "destinatari": "Anna",
+        "contingut": "Hola Anna!",
+        "personatge": "Einstein",
+        "id": 8
+    },
+    {
+        "remitent": "Test",
+        "destinatari": "Test",
+        "contingut": "Test",
+        "personatge": "Test",
+        "id": 9
+    },
+    {
+        "remitent": "Pau",
+        "destinatari": "Anna",
+        "contingut": "Hola Anna!",
+        "personatge": "Einstein",
+        "id": 10
+    },
+    {
+        "remitent": "Test",
+        "destinatari": "Test",
+        "contingut": "Test",
+        "personatge": "Test",
+        "id": 11
+    },
+    {
+        "remitent": "Derick",
+        "destinatari": "Melqui",
+        "contingut": "hola",
+        "personatge": "melquiades",
+        "id": 12
     }
 ]

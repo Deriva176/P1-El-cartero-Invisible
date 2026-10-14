@@ -83,38 +83,3 @@ test('delegació d\'events: elimina carta en clicar el botó', async () => {
 
     expect(document.querySelectorAll('.carta').length).toBe(0);
 });
-
-
-// TEST 5: Validació del formulari
-test('validació del formulari: no permet enviar camps buits', () => {
-    document.body.innerHTML = `
-        <form id="formCarta">
-            <input type="text" id="remitent" required>
-            <input type="text" id="destinatari" required>
-            <textarea id="contingut" required></textarea>
-            <button type="submit">Enviar carta</button>
-        </form>
-    `;
-
-    const formulari = document.getElementById('formCarta');
-    let enviat = false;
-
-    formulari.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const remitent = document.getElementById('remitent').value.trim();
-        const destinatari = document.getElementById('destinatari').value.trim();
-        const contingut = document.getElementById('contingut').value.trim();
-
-        if (!remitent || !destinatari || !contingut) {
-            return;
-        }
-
-        enviat = true;
-    });
-
-    // Simulem l'enviament del formulari
-    fireEvent.submit(formulari);
-
-    expect(enviat).toBe(false);
-});

@@ -69,7 +69,10 @@ def crear_carta(carta: Carta):
     nova_carta = carta.model_dump()
 
     # Assignem un ID
-    nova_carta["id"] = len(cartes) + 1
+    if cartes:
+        nova_carta["id"] = max(c["id"] for c in cartes) + 1
+    else:
+        nova_carta["id"] = 1
 
     # Guardem la carta
     cartes.append(nova_carta)
