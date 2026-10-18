@@ -1,3 +1,4 @@
+console.log("✅ SCRIPT.JS SE HA CARGADO");
 //////////////////////////
 // VARIABLES GLOBALS    //
 //////////////////////////
@@ -5,24 +6,8 @@
 let nom = "Derick";
 let edat = 30;
 
-// Array amb les 3 cartes simulades
-let cartesSimulades = [
-    {
-        id: 1,
-        remitent: "Carter 1",
-        contingut: "Hola! Aquesta és la primera carta."
-    },
-    {
-        id: 2,
-        remitent: "Carter 2",
-        contingut: "Aquesta és la segona carta."
-    },
-    {
-        id: 3,
-        remitent: "Carter 3",
-        contingut: "I aquesta és la tercera carta."
-    }
-];
+// MODIFICACIO! Array esborrat amb les 3 cartes simulades
+
 
 
 //////////////////////////
@@ -34,11 +19,39 @@ function saluda() {
 }
 
 
-// Funció per mostrar les cartes
+// NOVETAT: Carreguem les cartes des del servidor mitjançant GET.
+async function carregarCartes() {
+    try {
+        const response = await fetch("http://127.0.0.1:8000/cartas");
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const cartes = await response.json();
+
+        // MODIFICACIO: Esborrem l'array de cartes simuladesamb les cartes del servidor.
+        
+
+        // Mostrem les cartes rebudes.
+        renderitzarCartes(cartes);
+
+    } catch (error) {
+        console.error("Error carregant cartes:", error);
+
+        alert(
+            "No s'han pogut carregar les cartes. " +
+            "Comprova que el servidor està en marxa."
+        );
+    }
+}
+
+
+// MODIFICACIÓ: La funció rep el paràmetre cartes.
 function renderitzarCartes(cartes) {
     const contenidor = document.querySelector("#contenidorCartes");
 
-    // Si el contenidor no existeix, no fem res
+    // Si el contenidor no existeix, no fem res.
     if (!contenidor) return;
 
     contenidor.innerHTML = "";
@@ -58,6 +71,7 @@ function renderitzarCartes(cartes) {
         span.setAttribute("data-id", carta.id);
 
         const btnEliminar = document.createElement("button");
+        btnEliminar.type = "button";
         btnEliminar.textContent = "Eliminar";
         btnEliminar.className = "btn-eliminar";
         btnEliminar.dataset.id = carta.id;
@@ -74,6 +88,51 @@ function renderitzarCartes(cartes) {
 
 // Funció d'inicialització
 function inicialitzar() {
+    console.log("✅ LA FUNCIÓN INICIALITZAR SE HA EJECUTADO");
+
+    // Botó per afegir cartes
+    const btnAfegir = document.querySelector("#btnAfegir");
+
+    if (btnAfegir) {
+        btnAfegir.type = "button";
+
+        btnAfegir.addEventListener("click", async () => {
+            console.log("S'HA PULSAT EL BOTÓ AFEGIR");
+
+            const novaCarta = {
+                remitent: "Carter de prova",
+                destinatari: "Destinatari de prova",
+                contingut: "Aquesta carta s'acaba de crear dinàmicament!",
+                personatge: "Einstein"
+            };
+
+            try {
+                const response = await fetch(
+                    "http://127.0.0.1:8000/cartas",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(novaCarta)
+                    }
+                );
+
+                console.log("Respuesta del POST:", response.status);
+
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+
+                // Tornem a carregar les cartes reals del servidor.
+                await carregarCartes();
+
+            } catch (error) {
+                console.error("Error afegint la carta de prova:", error);
+                alert("No s'ha pogut afegir la carta de prova.");
+            }
+        });
+    }
 
     // Botó de saludar
     const boto = document.getElementById("btnSaluda");
@@ -94,21 +153,32 @@ function inicialitzar() {
     const contenidor = document.querySelector("#contenidorCartes");
 
     if (contenidor) {
-        contenidor.innerHTML = "<p>Cartes pendents: 0</p>";
+        contenidor.innerHTML = "<p>Carregant cartes...</p>";
 
-        // Mostrar les cartes inicials
-        renderitzarCartes(cartesSimulades);
-
-        // Delegació d'esdeveniments per eliminar cartes
-        contenidor.addEventListener("click", (event) => {
+        // Eliminem les cartes mitjançant una petició DELETE.
+        contenidor.addEventListener("click", async (event) => {
             if (event.target.classList.contains("btn-eliminar")) {
                 const id = Number(event.target.dataset.id);
 
-                cartesSimulades = cartesSimulades.filter(
-                    carta => carta.id !== id
-                );
+                try {
+                    const response = await fetch(
+                        `http://127.0.0.1:8000/cartas/${id}`,
+                        {
+                            method: "DELETE"
+                        }
+                    );
 
-                renderitzarCartes(cartesSimulades);
+                    if (!response.ok) {
+                        throw new Error(`Error HTTP: ${response.status}`);
+                    }
+
+                    // Actualitzem la llista després d'eliminar.
+                    await carregarCartes();
+
+                } catch (error) {
+                    console.error("Error eliminant la carta:", error);
+                    alert("No s'ha pogut eliminar la carta.");
+                }
             }
         });
     }
@@ -129,32 +199,16 @@ function inicialitzar() {
         });
     }
 
-    // Botó per afegir cartes
-    const btnAfegir = document.querySelector("#btnAfegir");
-
-    if (btnAfegir) {
-        btnAfegir.addEventListener("click", () => {
-            const nouId = Math.max(
-                0,
-                ...cartesSimulades.map(carta => carta.id)
-            ) + 1;
-
-            cartesSimulades.push({
-                id: nouId,
-                remitent: "Carter " + nouId,
-                contingut: "Aquesta carta s'acaba de crear dinàmicament!"
-            });
-
-            renderitzarCartes(cartesSimulades);
-        });
-    }
 
     // Formulari de carta
     const formCarta = document.querySelector("#formCarta");
 
     if (formCarta) {
-        formCarta.addEventListener("submit", (event) => {
+
+        // NOVETAT: Enviem la carta al servidor mitjançant POST.
+        formCarta.addEventListener("submit", async (event) => {
             event.preventDefault();
+            console.log("FORMULARIO ENVIADO");
 
             const remitent = document.querySelector("#remitent").value.trim();
             const destinatari = document.querySelector("#destinatari").value.trim();
@@ -166,35 +220,60 @@ function inicialitzar() {
                 return;
             }
 
-            const nouId = Math.max(
-                0,
-                ...cartesSimulades.map(carta => carta.id)
-            ) + 1;
-
-            cartesSimulades.push({
-                id: nouId,
+            // Preparem les dades de la carta que enviarem al servidor.
+            const novaCarta = {
                 remitent: remitent,
                 destinatari: destinatari,
                 contingut: contingut,
                 personatge: personatge
-            });
+            };
 
-            renderitzarCartes(cartesSimulades);
-            formCarta.reset();
+            try {
+
+                const response = await fetch(
+                    "http://127.0.0.1:8000/cartas",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(novaCarta)
+                    }
+                );
+                                console.log("Respuesta del POST:", response.status);
+
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+
+                // NOVETAT: Netegem el formulari després d'enviar.
+                formCarta.reset();
+
+                // NOVETAT: Refresquem la llista després del POST.
+                await carregarCartes();
+
+            } catch (error) {
+                console.error("Error enviant la carta:", error);
+                alert("No s'ha pogut enviar la carta.");
+            }
         });
     }
 }
 
 
-////////////////
-// CODI       //
-////////////////
+//////////////////////////
+// CODI D'INICIALITZACIÓ //
+//////////////////////////
 
-// No inicialitzem automàticament l'aplicació durant els tests de Jest
+// NOVETAT: Quan es carrega el DOM, inicialitzem l'aplicació
+// i carreguem les cartes des del servidor.
 if (typeof document !== "undefined") {
-    document.addEventListener("DOMContentLoaded", inicialitzar);
+    document.addEventListener("DOMContentLoaded", () => {
+        inicialitzar();
+        carregarCartes();
+    });
 }
 
 
-// Exportem la funció per als tests
-export { renderitzarCartes };
+// Exportem les funcions per als tests de Jest.
+export { renderitzarCartes, carregarCartes };

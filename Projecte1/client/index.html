@@ -18,34 +18,39 @@
 
         <p class="info">Benvingut al teu buzón virtual</p>
 
-        <!-- Aquí JavaScript generará las cartas -->
+        <!-- Aquí JavaScript generarà les cartes -->
         <div id="contenidorCartes">
         </div>
 
         <!-- Botó Saluda -->
         <div class="contenidorBoton">
-            <button id="btnSaluda">Saluda'm!</button>
+            <button type="button" id="btnSaluda">Saluda'm!</button>
         </div>
 
         <!-- Buzón -->
         <div>
-            <button id="buzon">📬</button>
+            <button type="button" id="buzon">📬</button>
         </div>
 
         <!-- Botó per afegir una carta -->
         <div class="contenidorBoton">
-            <button id="btnAfegir">Afegir carta de prova</button>
+            <button type="button" id="btnAfegir">
+                Afegir carta de prova
+            </button>
         </div>
 
+        <!-- Llistat de cartes -->
         <section id="llistatCartes">
-            <!-- de moment buit -->
+            <!-- De moment buit -->
         </section>
 
         <!-- Formulari per crear una carta -->
         <section id="formulariCarta">
+
             <h2>Escriu una carta</h2>
 
             <form id="formCarta">
+
                 <input
                     type="text"
                     id="remitent"
@@ -73,12 +78,16 @@
                 >
 
                 <button type="submit">Enviar carta</button>
+
             </form>
+
         </section>
 
         <!-- Botó per mostrar o amagar la taula -->
         <div class="contenidorBoton">
-            <button id="btnMostrarTaula">Mostrar taula</button>
+            <button type="button" id="btnMostrarTaula">
+                Mostrar taula
+            </button>
         </div>
 
         <!-- Taula de cartes, oculta inicialment -->

@@ -42,45 +42,52 @@
         "id": 6
     },
     {
-        "remitent": "Test",
-        "destinatari": "Test",
-        "contingut": "Test",
-        "personatge": "Test",
+        "remitent": "Derick",
+        "destinatari": "Melqui",
+        "contingut": "Hola Melquiades",
+        "personatge": "Abinadab",
         "id": 7
-    },
-    {
-        "remitent": "Pau",
-        "destinatari": "Anna",
-        "contingut": "Hola Anna!",
-        "personatge": "Einstein",
-        "id": 8
-    },
-    {
-        "remitent": "Test",
-        "destinatari": "Test",
-        "contingut": "Test",
-        "personatge": "Test",
-        "id": 9
-    },
-    {
-        "remitent": "Pau",
-        "destinatari": "Anna",
-        "contingut": "Hola Anna!",
-        "personatge": "Einstein",
-        "id": 10
-    },
-    {
-        "remitent": "Test",
-        "destinatari": "Test",
-        "contingut": "Test",
-        "personatge": "Test",
-        "id": 11
     },
     {
         "remitent": "Derick",
         "destinatari": "Melqui",
-        "contingut": "hola",
-        "personatge": "melquiades",
+        "contingut": "Hola br",
+        "personatge": "Abinadab",
+        "id": 8
+    },
+    {
+        "remitent": "Derick",
+        "destinatari": "Melqui",
+        "contingut": "tt",
+        "personatge": "deriva",
+        "id": 9
+    },
+    {
+        "remitent": "Carter de prova",
+        "destinatari": "Destinatari de prova",
+        "contingut": "Aquesta carta s'acaba de crear dinàmicament!",
+        "personatge": "Einstein",
+        "id": 11
+    },
+    {
+        "remitent": "Carter de prova",
+        "destinatari": "Destinatari de prova",
+        "contingut": "Aquesta carta s'acaba de crear dinàmicament!",
+        "personatge": "Einstein",
         "id": 12
+    },
+    {
+        "remitent": "Derick",
+        "destinatari": "Melqui",
+        "contingut": "bb",
+        "personatge": "FOSKI",
+        "id": 13
+    },
+    {
+        "remitent": "Carter de prova",
+        "destinatari": "Destinatari de prova",
+        "contingut": "Aquesta carta s'acaba de crear dinàmicament!",
+        "personatge": "Einstein",
+        "id": 14
     }
 ]
