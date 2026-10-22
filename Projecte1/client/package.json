@@ -19,5 +19,10 @@
     "@testing-library/user-event": "^14.6.7",
     "jest": "^30.5.2",
     "jest-environment-jsdom": "^30.5.2"
-  }
+  },
+  "jest": {
+  "testEnvironment": "jsdom",
+  "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"]
+} 
+
 }

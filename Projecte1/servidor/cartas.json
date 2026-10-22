@@ -57,37 +57,9 @@
     },
     {
         "remitent": "Derick",
-        "destinatari": "Melqui",
+        "destinatari": "Fouzi",
         "contingut": "tt",
-        "personatge": "deriva",
-        "id": 9
-    },
-    {
-        "remitent": "Carter de prova",
-        "destinatari": "Destinatari de prova",
-        "contingut": "Aquesta carta s'acaba de crear dinàmicament!",
-        "personatge": "Einstein",
-        "id": 12
-    },
-    {
-        "remitent": "Derick",
-        "destinatari": "Melqui",
-        "contingut": "bb",
         "personatge": "FOSKI",
-        "id": 13
-    },
-    {
-        "remitent": "Carter de prova",
-        "destinatari": "Destinatari de prova",
-        "contingut": "Aquesta carta s'acaba de crear dinàmicament!",
-        "personatge": "Einstein",
-        "id": 14
-    },
-    {
-        "remitent": "Derick",
-        "destinatari": "Deriva",
-        "contingut": "como estas",
-        "personatge": "Deriva17",
-        "id": 15
+        "id": 9
     }
 ]

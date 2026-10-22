@@ -1,3 +1,5 @@
+
+
 console.log("✅ SCRIPT.JS SE HA CARGADO");
 //////////////////////////
 // VARIABLES GLOBALS    //
@@ -11,11 +13,18 @@ let edat = 30;
 
 
 //////////////////////////
-// FUNCIONS             //
+// FUNCIONS            //
 //////////////////////////
 
 function saluda() {
     alert("Hola, Derick!");
+}
+
+
+// NOVETAT: Funció per mostrar errors (requerida pels tests)
+function mostrarError(missatge) {
+    console.error(missatge);
+    alert(missatge);
 }
 
 
@@ -30,19 +39,14 @@ async function carregarCartes() {
 
         const cartes = await response.json();
 
-        // MODIFICACIO: Esborrem l'array de cartes simuladesamb les cartes del servidor.
-        
-
         // Mostrem les cartes rebudes.
         renderitzarCartes(cartes);
 
     } catch (error) {
         console.error("Error carregant cartes:", error);
 
-        alert(
-            "No s'han pogut carregar les cartes. " +
-            "Comprova que el servidor està en marxa."
-        );
+        // Utilitzem la funció mostrarError perquè els tests la puguin detectar
+        mostrarError("No s'han pogut carregar les cartes");
     }
 }
 
@@ -90,6 +94,24 @@ function renderitzarCartes(cartes) {
 function inicialitzar() {
     console.log("✅ LA FUNCIÓN INICIALITZAR SE HA EJECUTADO");
 
+    // Botó per mostrar o amagar la taula
+const btnMostrarTaula = document.getElementById("btnMostrarTaula");
+const seccioTaula = document.getElementById("seccioTaula");
+
+if (btnMostrarTaula && seccioTaula) {
+    btnMostrarTaula.addEventListener("click", () => {
+
+        if (seccioTaula.style.display === "none") {
+            seccioTaula.style.display = "block";
+            btnMostrarTaula.textContent = "Amagar taula";
+        } else {
+            seccioTaula.style.display = "none";
+            btnMostrarTaula.textContent = "Mostrar taula";
+        }
+
+    });
+}
+
     // Botó per afegir cartes
     const btnAfegir = document.querySelector("#btnAfegir");
 
@@ -129,7 +151,7 @@ function inicialitzar() {
 
             } catch (error) {
                 console.error("Error afegint la carta de prova:", error);
-                alert("No s'ha pogut afegir la carta de prova.");
+                mostrarError("No s'ha pogut afegir la carta de prova.");
             }
         });
     }
@@ -177,7 +199,7 @@ function inicialitzar() {
 
                 } catch (error) {
                     console.error("Error eliminant la carta:", error);
-                    alert("No s'ha pogut eliminar la carta.");
+                    mostrarError("No s'ha pogut eliminar la carta.");
                 }
             }
         });
@@ -216,7 +238,7 @@ function inicialitzar() {
             const personatge = document.querySelector("#personatge").value.trim();
 
             if (!remitent || !destinatari || !contingut) {
-                alert("Has d'omplir el remitent, destinatari i contingut.");
+                mostrarError("Has d'omplir el remitent, destinatari i contingut.");
                 return;
             }
 
@@ -240,7 +262,7 @@ function inicialitzar() {
                         body: JSON.stringify(novaCarta)
                     }
                 );
-                                console.log("Respuesta del POST:", response.status);
+                console.log("Respuesta del POST:", response.status);
 
                 if (!response.ok) {
                     throw new Error(`Error HTTP: ${response.status}`);
@@ -254,7 +276,7 @@ function inicialitzar() {
 
             } catch (error) {
                 console.error("Error enviant la carta:", error);
-                alert("No s'ha pogut enviar la carta.");
+                mostrarError("No s'ha pogut enviar la carta.");
             }
         });
     }
@@ -275,5 +297,5 @@ if (typeof document !== "undefined") {
 }
 
 
-// Exportem les funcions per als tests de Jest.
-export { renderitzarCartes, carregarCartes };
+// Exportem totes les funcions necessàries per als tests de Jest.
+export { renderitzarCartes, carregarCartes, mostrarError };

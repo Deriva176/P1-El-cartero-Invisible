@@ -63,6 +63,11 @@ section:first-child {
 /* Contenidor de cartes */
 #contenidorCartes {
   width: 100%;
+   display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 120px;
+    row-gap: 8px;
+    margin-top: 20px;
 }
 
 /* Carta */
@@ -70,7 +75,7 @@ section:first-child {
   border: 1px solid #ccc;
   padding: 2rem;
   margin: 1em auto;
-  width: 95%;
+  width: 120%;
   border-radius: 12px;
   background-color: #b7daf2;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
