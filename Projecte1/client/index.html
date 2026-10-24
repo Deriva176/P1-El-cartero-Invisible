@@ -4,96 +4,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>El Cartero Invisible</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <!-- CAPÇALERA -->
     <header>
-        <h1 id="titolPrincipal">El Cartero Invisible</h1>
+        <h1 id="titolPrincipal">📮 El Cartero Invisible – Setmana 2</h1>
     </header>
 
+
+    <!-- CONTINGUT PRINCIPAL -->
     <main class="contenidorPrincipal">
 
-        <p class="info">Benvingut al teu buzón virtual</p>
-
-        <!-- Aquí JavaScript generarà les cartes -->
-        <div id="contenidorCartes">
-        </div>
-
-        <!-- Botó Saluda -->
-        <div class="contenidorBoton">
-            <button type="button" id="btnSaluda">Saluda'm!</button>
-        </div>
-
-        <!-- Buzón -->
-        <div>
-            <button type="button" id="buzon">📬</button>
-        </div>
-
-        <!-- Botó per afegir una carta -->
-        <div class="contenidorBoton">
-            <button type="button" id="btnAfegir">
-                Afegir carta de prova
-            </button>
-        </div>
-
-        <!-- Llistat de cartes -->
-        <section id="llistatCartes">
-            <!-- De moment buit -->
+        <!-- INFORMACIÓ DE BENVINGUDA -->
+        <section class="info">
+            <p>Benvingut al teu búzon virtual</p>
         </section>
 
-        <!-- Formulari per crear una carta -->
-        <section id="formulariCarta">
 
-            <h2>Escriu una carta</h2>
+        <!-- CONTENIDOR DE CARTES -->
+        <section id="contenidorCartes">
+            <p>Carregant cartes...</p>
+        </section>
+
+
+        <!-- BOTÓ PER SALUDAR -->
+        <section class="contenidorBoton">
+            <button id="btnSaluda" type="button">
+                Saludar
+            </button>
+        </section>
+
+
+        <!-- BÚSTIA VIRTUAL -->
+        <div id="buzon">
+            📬
+        </div>
+
+
+        <!-- AFegir CARTA DE PROVA -->
+        <section class="contenidorBoton">
+            <button id="btnAfegirCarta" type="button">
+                Afegir carta de prova
+            </button>
+        </section>
+
+
+        <!-- FORMULARI PER CREAR UNA CARTA -->
+        <section id="seccioCrear">
+
+            <h2>Crear una carta</h2>
 
             <form id="formCarta">
 
+                <label for="remitent">Remitent:</label>
                 <input
                     type="text"
                     id="remitent"
-                    placeholder="El teu nom"
+                    name="remitent"
                     required
                 >
 
+                <label for="destinatari">Destinatari:</label>
                 <input
                     type="text"
                     id="destinatari"
-                    placeholder="A qui va dirigida?"
+                    name="destinatari"
                     required
                 >
 
+                <label for="contingut">Contingut:</label>
                 <textarea
                     id="contingut"
-                    placeholder="Escriu la teva carta..."
+                    name="contingut"
                     required
                 ></textarea>
 
+                <label for="personatge">Personatge:</label>
                 <input
                     type="text"
                     id="personatge"
-                    placeholder="A quin personatge escrius? (ex: Einstein)"
+                    name="personatge"
                 >
 
-                <button type="submit">Enviar carta</button>
+                <button type="submit">
+                    Crear carta
+                </button>
 
             </form>
 
         </section>
 
-        <!-- Botó per mostrar o amagar la taula -->
-        <div class="contenidorBoton">
-            <button type="button" id="btnMostrarTaula">
+
+        <!-- BOTÓ PER MOSTRAR LA TAULA -->
+        <section class="contenidorBoton">
+
+            <button id="btnMostrarTaula" type="button">
                 Mostrar taula
             </button>
-        </div>
 
-        <!-- Taula de cartes, oculta inicialment -->
+        </section>
+
+
+        <!-- TAULA DE CARTES -->
         <section id="seccioTaula" style="display: none;">
 
-            <h2>📋 Llistat de cartes</h2>
+            <h2>Taula de cartes</h2>
 
             <table id="taulaCartes">
 
@@ -102,13 +123,14 @@
                         <th>ID</th>
                         <th>Remitent</th>
                         <th>Destinatari</th>
-                        <th>Contingut (resum)</th>
+                        <th>Contingut</th>
+                        <th>Personatge</th>
                         <th>Accions</th>
                     </tr>
                 </thead>
 
                 <tbody id="cosTaula">
-                    <!-- JavaScript afegirà les cartes aquí -->
+                    <!-- Les files es generen amb JavaScript -->
                 </tbody>
 
             </table>
@@ -117,13 +139,143 @@
 
     </main>
 
+
+    <!-- ========================================= -->
+    <!-- FINESTRA MODAL PER EDITAR UNA CARTA       -->
+    <!-- ========================================= -->
+
+    <div
+        id="modalEditar"
+        class="modal"
+        style="display: none;"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="titolModal"
+    >
+
+        <div class="modal-contingut">
+
+            <!-- BOTÓ PER TANCAR LA FINESTRA -->
+            <button
+                type="button"
+                id="btnTancarModal"
+                class="tancar-modal"
+                aria-label="Tancar finestra"
+            >
+                &times;
+            </button>
+
+
+            <h2 id="titolModal">
+                Editar carta
+            </h2>
+
+
+            <!-- FORMULARI D'EDICIÓ -->
+            <form id="formEditar">
+
+                <!-- ID DE LA CARTA QUE S'ESTÀ EDITANT -->
+                <input
+                    type="hidden"
+                    id="editarId"
+                    name="id"
+                >
+
+
+                <!-- REMITENT -->
+                <label for="editarRemitent">
+                    Remitent:
+                </label>
+
+                <input
+                    type="text"
+                    id="editarRemitent"
+                    name="remitent"
+                    required
+                >
+
+
+                <!-- DESTINATARI -->
+                <label for="editarDestinatari">
+                    Destinatari:
+                </label>
+
+                <input
+                    type="text"
+                    id="editarDestinatari"
+                    name="destinatari"
+                    required
+                >
+
+
+                <!-- CONTINGUT -->
+                <label for="editarContingut">
+                    Contingut:
+                </label>
+
+                <textarea
+                    id="editarContingut"
+                    name="contingut"
+                    required
+                ></textarea>
+
+
+                <!-- PERSONATGE -->
+                <label for="editarPersonatge">
+                    Personatge:
+                </label>
+
+                <input
+                    type="text"
+                    id="editarPersonatge"
+                    name="personatge"
+                >
+
+
+                <!-- BOTONS DEL MODAL -->
+                <div class="modal-botons">
+
+                    <button
+                        type="submit"
+                        id="btnDesarEdicio"
+                    >
+                        Desar canvis
+                    </button>
+
+                    <button
+                        type="button"
+                        id="btnCancelEditar"
+                    >
+                        Cancel·lar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- INDICADOR DE CÀRREGA -->
+    <p
+        id="indicadorCarrega"
+        style="display: none;"
+        role="status"
+    >
+        Carregant...
+    </p>
+
+
+    <!-- PEU DE PÀGINA -->
     <footer>
-        <marquee behavior="scroll" direction="left">
-            <p>&copy; 2026 El Cartero Invisible</p>
-        </marquee>
+        <p>© El Cartero Invisible</p>
     </footer>
 
-    <script type="module" src="script.js" defer></script>
+
+    <!-- JAVASCRIPT -->
+    <script type="module" src="script.js"></script>
 
 </body>
 

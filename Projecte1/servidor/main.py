@@ -22,6 +22,7 @@ app.add_middleware(
 # Fitxer on es guardaran les cartes
 DATA_FILE = "cartas.json"
 
+# **FUNCIONES**
 
 # Funció per carregar les cartes del fitxer JSON
 def cargar_cartes():
@@ -71,10 +72,12 @@ class Carta(BaseModel):
     contingut: str
     personatge: str
 
-
+#DECLARACION VARIABLE
 # Emmagatzematge en memòria
 cartes = cargar_cartes()
 
+
+# **ENDPOINTS**
 
 # Crear una carta
 @app.post("/cartas", status_code=201)
@@ -97,6 +100,24 @@ def crear_carta(carta: Carta):
     # Retornem la carta creada
     return nova_carta
 
+# Editar una carta
+@app.put("/cartas/{id}")
+def actualizar_carta(id: int, carta_actualizada: Carta):
+    for i, carta in enumerate(cartes):
+        if carta["id"] == id:
+            cartes[i] = {
+                "id": id,
+                "remitent": carta_actualizada.remitent,
+                "destinatari": carta_actualizada.destinatari,
+                "contingut": carta_actualizada.contingut,
+                "personatge": carta_actualizada.personatge
+            }
+            
+            # Guardar los cambios en cartas.json
+            guardar_cartes(cartes)
+            return cartes[i]
+
+    raise HTTPException(status_code=404, detail="Carta no trobada")
 
 # Ruta principal
 @app.get("/")
@@ -134,12 +155,12 @@ def eliminar_carta(id: int):
 
 # Llistar cartes amb limit, offset i filtre per personatge
 @app.get("/cartas")
-def llistar_cartes(limit: int = 10, offset: int = 0, personatge: str = None):
+def llistar_cartes(limit: int = 100, offset: int = 0, personatge: str = None):
 
     if personatge:
         cartesFiltrades = [
             c for c in cartes
-            if c["remitent"] == personatge
+            if c["personatge"] == personatge
         ]
     else:
         cartesFiltrades = cartes

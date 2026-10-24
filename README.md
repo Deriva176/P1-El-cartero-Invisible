@@ -47,4 +47,29 @@ cartero-invisible/
 │   ├── saludar.test.js         # Test unitari Jest del client
 │   └── package.json            # Dependències i scripts de Node/Jest
 │
+
+
+
+## Endpoints de cartas
+
+La API permite crear, consultar, modificar y eliminar cartas.
+
+### 1. Obtener todas las cartas
+
+- **URL:** `/cartas`
+- **Método:** `GET`
+- **Parámetros:** ninguno.
+
+Ejemplo de respuesta:
+
+```json
+[
+  {
+    "id": 1,
+    "remitent": "Maria",
+    "destinatari": "Pau",
+    "contingut": "Hola Pau!",
+    "personatge": "Einstein"
+  }
+]
 └── README.md

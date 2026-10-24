@@ -61,5 +61,12 @@
         "contingut": "tt",
         "personatge": "FOSKI",
         "id": 9
+    },
+    {
+        "remitent": "Derick",
+        "destinatari": "Melqui",
+        "contingut": "hola",
+        "personatge": "derick",
+        "id": 10
     }
 ]
