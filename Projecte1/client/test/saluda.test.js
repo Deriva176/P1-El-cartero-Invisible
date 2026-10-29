@@ -11,9 +11,21 @@ import { carregarCartes } from '../script.js';
 // TEST 1: Renderitza les cartes correctament
 test('renderitza les cartes correctament', () => {
     const cartes = [
-        { id: 1, remitent: 'Maria', contingut: 'Hola!' },
-        { id: 2, remitent: 'Joan', contingut: 'Com estàs?' }
-    ];
+    {
+        id: 1,
+        remitent: 'Maria',
+        destinatari: 'Joan',
+        contingut: 'Hola!',
+        personatge: 'Einstein'
+    },
+    {
+        id: 2,
+        remitent: 'Joan',
+        destinatari: 'Maria',
+        contingut: 'Com estàs?',
+        personatge: 'Sherlock Holmes'
+    }
+];
 
     document.body.innerHTML = `<div id="contenidorCartes"></div>`;
 
@@ -23,7 +35,12 @@ test('renderitza les cartes correctament', () => {
 
     expect(cartesElements.length).toBe(2);
     expect(cartesElements[0].querySelector('h3').textContent).toBe('De: Maria');
-    expect(cartesElements[0].querySelector('p').textContent).toBe('Hola!');
+
+    const paragraphs = cartesElements[0].querySelectorAll('p');
+
+    expect(paragraphs[0].textContent).toBe('Per a: Joan');
+    expect(paragraphs[1].textContent).toBe('Hola!');
+
 });
 
 // TEST 2: El botó mostra un alert amb "Hola, món!"

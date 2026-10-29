@@ -163,12 +163,14 @@ async def test_delete_carta():
 
     assert not any(c["id"] == 1 for c in dades)
 
+
 # TEST 8:Comprueba que la respuesta del endpoint /cartas incluye la cabecera CORSrigen indicado en la petición.
 @pytest.mark.asyncio
 async def test_cors_headers():
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
         response = await ac.get("/cartas", headers={"Origin": "http://127.0.0.1:5500"})
         assert "access-control-allow-origin" in response.headers
+
 
 #  TEST 9:Comprueba que el endpoint GET /cartas responde con el código HTTP 200
 @pytest.mark.asyncio
@@ -177,3 +179,23 @@ async def test_get_cartes():
         response = await ac.get("/cartas")
         assert response.status_code == 200
         assert isinstance(response.json(), list)
+
+
+# TEST 10: Comprova que es pot actualitzar una carta amb PUT i que els canvis es guarden al fitxer JSON.
+@pytest.mark.asyncio
+async def test_update_carta():
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+        payload = {"remitent": "Nou", "destinatari": "Nou", "contingut": "Nou", "personatge": "Nou"}
+        response = await ac.put("/cartas/2", json=payload)
+        assert response.status_code == 200
+        assert response.json()["remitent"] == "Nou"
+
+
+# TEST 11: Comprova que PUT retorna un error 404 quan s'intenta actualitzar una carta amb un ID inexistent.
+@pytest.mark.asyncio
+async def test_update_carta_not_found():
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+        payload = {"remitent": "X", "destinatari": "X", "contingut": "X", "personatge": "X"}
+        response = await ac.put("/cartas/999", json=payload)
+        assert response.status_code == 404
+

@@ -51,7 +51,7 @@ async function carregarCartes() {
 function mostrarCarrega(mostrar) {
     const indicador = document.getElementById("indicadorCarrega");
 
-        if (indicador) {
+    if (indicador) {
         indicador.style.display = mostrar ? "block" : "none";
     }
 
@@ -118,7 +118,7 @@ function renderitzarCartes(cartes) {
 
 
 // Actualitzar una carta
-async function actualitzarCarta(id, dades) {
+export async function actualitzarCarta(id, dades) {
     try {
         mostrarCarrega(true);
 
@@ -153,7 +153,7 @@ async function actualitzarCarta(id, dades) {
 
 
 // Eliminar una carta
-async function eliminarCarta(id) {
+export async function eliminarCarta(id) {
     const confirmacio = confirm(
         "Segur que vols eliminar aquesta carta?"
     );
@@ -174,6 +174,7 @@ async function eliminarCarta(id) {
             throw new Error(`Error HTTP: ${response.status}`);
         }
 
+        // Actualitzar les targetes i la taula
         await carregarCartes();
 
     } catch (error) {
@@ -197,11 +198,6 @@ function renderitzarTaula(cartes) {
     cartes.forEach(carta => {
         const fila = document.createElement("tr");
 
-        // ID
-        const tdId = document.createElement("td");
-        tdId.textContent = carta.id;
-        fila.appendChild(tdId);
-
         // Remitent
         const tdRemitent = document.createElement("td");
         tdRemitent.textContent = carta.remitent;
@@ -224,19 +220,32 @@ function renderitzarTaula(cartes) {
 
         // Personatge
         const tdPersonatge = document.createElement("td");
-        tdPersonatge.textContent = carta.personatge || "No especificat";
+        tdPersonatge.textContent =
+            carta.personatge || "No especificat";
+
         fila.appendChild(tdPersonatge);
 
         // Accions
         const tdAccions = document.createElement("td");
 
+        // Botó Editar
+        const btnEditar = document.createElement("button");
+        btnEditar.type = "button";
+        btnEditar.textContent = "Editar";
+        btnEditar.className = "btn-editar";
+        btnEditar.dataset.id = carta.id;
+
+        // Botó Eliminar
         const btnEliminar = document.createElement("button");
         btnEliminar.type = "button";
         btnEliminar.textContent = "Eliminar";
         btnEliminar.className = "btn-eliminar";
         btnEliminar.dataset.id = carta.id;
 
+        // Afegir els botons a la cel·la
+        tdAccions.appendChild(btnEditar);
         tdAccions.appendChild(btnEliminar);
+
         fila.appendChild(tdAccions);
 
         cosTaula.appendChild(fila);
@@ -330,76 +339,106 @@ function inicialitzar() {
 
 
     // Gestionar els botons Editar i Eliminar
-    const contenidorCartes = document.getElementById("contenidorCartes");
+    // tant a les targetes com a la taula
 
-    if (contenidorCartes) {
-        contenidorCartes.addEventListener("click", async event => {
+    const contenidorCartes =
+        document.getElementById("contenidorCartes");
 
-            const botoPremut = event.target.closest("button");
+    const cosTaula =
+        document.getElementById("cosTaula");
 
-            if (!botoPremut) return;
+
+    // Funció compartida per gestionar els botons
+    async function gestionarBotons(event) {
+        const botoPremut = event.target.closest("button");
+
+        if (!botoPremut) return;
+
+        const id = Number(botoPremut.dataset.id);
+
+        if (!id) return;
 
 
-            // EDITAR
-            if (botoPremut.classList.contains("btn-editar")) {
-                const id = Number(botoPremut.dataset.id);
+        // EDITAR
+        if (botoPremut.classList.contains("btn-editar")) {
+            try {
+                mostrarCarrega(true);
 
-                try {
-                    mostrarCarrega(true);
+                const response = await fetch(
+                    `http://127.0.0.1:8000/cartas/${id}`
+                );
 
-                    const response = await fetch(
-                        `http://127.0.0.1:8000/cartas/${id}`
-                    );
-
-                    if (!response.ok) {
-                        throw new Error(`Error HTTP: ${response.status}`);
-                    }
-
-                    const carta = await response.json();
-
-                    document.getElementById("editarId").value = carta.id;
-
-                    document.getElementById("editarRemitent").value =
-                        carta.remitent || "";
-
-                    document.getElementById("editarDestinatari").value =
-                        carta.destinatari || "";
-
-                    document.getElementById("editarContingut").value =
-                        carta.contingut || "";
-
-                    document.getElementById("editarPersonatge").value =
-                        carta.personatge || "";
-
-                    // CORRECCIÓ: utilitzem modalEditar, no seccioEditar
-                    const modalEditar = document.getElementById("modalEditar");
-
-                    if (!modalEditar) {
-                        throw new Error(
-                            "No s'ha trobat la finestra d'edició."
-                        );
-                    }
-
-                    modalEditar.style.display = "flex";
-
-                } catch (error) {
-                    console.error("Error carregant la carta:", error);
-                    mostrarError(
-                        "No s'han pogut carregar les dades de la carta."
-                    );
-
-                } finally {
-                    mostrarCarrega(false);
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
                 }
-            }
+
+                const carta = await response.json();
 
 
-            // ELIMINAR
-            if (botoPremut.classList.contains("btn-eliminar")) {
-                const id = Number(botoPremut.dataset.id);
-                await eliminarCarta(id);
+                // Carregar les dades al formulari d'edició
+                document.getElementById("editarId").value =
+                    carta.id;
+
+                document.getElementById("editarRemitent").value =
+                    carta.remitent || "";
+
+                document.getElementById("editarDestinatari").value =
+                    carta.destinatari || "";
+
+                document.getElementById("editarContingut").value =
+                    carta.contingut || "";
+
+                document.getElementById("editarPersonatge").value =
+                    carta.personatge || "";
+
+
+                // Obrir el mateix modal d'edició
+                const modalEditar =
+                    document.getElementById("modalEditar");
+
+                if (!modalEditar) {
+                    throw new Error(
+                        "No s'ha trobat el modal d'edició."
+                    );
+                }
+
+                modalEditar.style.display = "flex";
+
+            } catch (error) {
+                console.error("Error carregant la carta:", error);
+
+                mostrarError(
+                    "No s'han pogut carregar les dades de la carta."
+                );
+
+            } finally {
+                mostrarCarrega(false);
             }
-        });
+        }
+
+
+        // ELIMINAR
+        else if (botoPremut.classList.contains("btn-eliminar")) {
+            await eliminarCarta(id);
+        }
+    }
+
+
+    // Escoltar els clics de les targetes
+    if (contenidorCartes) {
+        contenidorCartes.addEventListener(
+            "click",
+            gestionarBotons
+        );
+    }
+
+
+    // Escoltar els clics de la taula
+    if (cosTaula) {
+        cosTaula.addEventListener(
+            "click",
+            gestionarBotons
+        );
     }
 
 
@@ -430,17 +469,27 @@ function inicialitzar() {
 
             console.log("FORMULARIO ENVIADO");
 
-            const remitent = document.querySelector("#remitent").value.trim();
-            const destinatari = document.querySelector("#destinatari").value.trim();
-            const contingut = document.querySelector("#contingut").value.trim();
-            const personatge = document.querySelector("#personatge").value.trim();
+            const remitent =
+                document.querySelector("#remitent").value.trim();
+
+            const destinatari =
+                document.querySelector("#destinatari").value.trim();
+
+            const contingut =
+                document.querySelector("#contingut").value.trim();
+
+            const personatge =
+                document.querySelector("#personatge").value.trim();
+
 
             if (!remitent || !destinatari || !contingut) {
                 mostrarError(
                     "Has d'omplir el remitent, destinatari i contingut."
                 );
+
                 return;
             }
+
 
             const novaCarta = {
                 remitent: remitent,
@@ -448,6 +497,7 @@ function inicialitzar() {
                 contingut: contingut,
                 personatge: personatge
             };
+
 
             try {
                 const response = await fetch(
@@ -473,6 +523,7 @@ function inicialitzar() {
 
             } catch (error) {
                 console.error("Error enviant la carta:", error);
+
                 mostrarError("No s'ha pogut enviar la carta.");
             }
         });
@@ -486,16 +537,30 @@ function inicialitzar() {
         formEditar.addEventListener("submit", async event => {
             event.preventDefault();
 
+
             const id = Number(
                 document.getElementById("editarId").value
             );
 
+
             const dades = {
-                remitent: document.getElementById("editarRemitent").value.trim(),
-                destinatari: document.getElementById("editarDestinatari").value.trim(),
-                contingut: document.getElementById("editarContingut").value.trim(),
-                personatge: document.getElementById("editarPersonatge").value.trim()
+                remitent: document
+                    .getElementById("editarRemitent")
+                    .value.trim(),
+
+                destinatari: document
+                    .getElementById("editarDestinatari")
+                    .value.trim(),
+
+                contingut: document
+                    .getElementById("editarContingut")
+                    .value.trim(),
+
+                personatge: document
+                    .getElementById("editarPersonatge")
+                    .value.trim()
             };
+
 
             // Validació
             if (
@@ -506,14 +571,18 @@ function inicialitzar() {
                 mostrarError(
                     "Has d'omplir el remitent, el destinatari i el contingut."
                 );
+
                 return;
             }
 
-            const btnDesar = document.getElementById("btnDesarEdicio");
+
+            const btnDesar =
+                document.getElementById("btnDesarEdicio");
 
             if (btnDesar) {
                 btnDesar.disabled = true;
             }
+
 
             try {
                 const correcte = await actualitzarCarta(id, dades);
@@ -521,7 +590,8 @@ function inicialitzar() {
                 if (correcte) {
                     formEditar.reset();
 
-                    const modalEditar = document.getElementById("modalEditar");
+                    const modalEditar =
+                        document.getElementById("modalEditar");
 
                     if (modalEditar) {
                         modalEditar.style.display = "none";
@@ -538,15 +608,18 @@ function inicialitzar() {
 
 
     // Cancel·lar edició
-    const btnCancelEditar = document.getElementById("btnCancelEditar");
+    const btnCancelEditar =
+        document.getElementById("btnCancelEditar");
 
     if (btnCancelEditar) {
         btnCancelEditar.addEventListener("click", () => {
+
             if (formEditar) {
                 formEditar.reset();
             }
 
-            const modalEditar = document.getElementById("modalEditar");
+            const modalEditar =
+                document.getElementById("modalEditar");
 
             if (modalEditar) {
                 modalEditar.style.display = "none";
@@ -556,11 +629,14 @@ function inicialitzar() {
 
 
     // Botó X per tancar el modal
-    const btnTancarModal = document.getElementById("btnTancarModal");
+    const btnTancarModal =
+        document.getElementById("btnTancarModal");
 
     if (btnTancarModal) {
         btnTancarModal.addEventListener("click", () => {
-            const modalEditar = document.getElementById("modalEditar");
+
+            const modalEditar =
+                document.getElementById("modalEditar");
 
             if (modalEditar) {
                 modalEditar.style.display = "none";
@@ -570,10 +646,12 @@ function inicialitzar() {
 
 
     // Tancar el modal en clicar fora del contingut
-    const modalEditar = document.getElementById("modalEditar");
+    const modalEditar =
+        document.getElementById("modalEditar");
 
     if (modalEditar) {
         modalEditar.addEventListener("click", event => {
+
             if (event.target === modalEditar) {
                 modalEditar.style.display = "none";
             }
@@ -595,4 +673,8 @@ if (typeof document !== "undefined") {
 
 
 // Exportar les funcions necessàries per als tests de Jest
-export { renderitzarCartes, carregarCartes, mostrarError };
+export {
+    renderitzarCartes,
+    carregarCartes,
+    mostrarError
+};
