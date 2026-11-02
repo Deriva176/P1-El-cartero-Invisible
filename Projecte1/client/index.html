@@ -14,9 +14,14 @@
 
     <!-- CAPÇALERA -->
     <header>
-        <h1 id="titolPrincipal">📮 El Cartero Invisible – Setmana 2</h1>
-    </header>
+        <h1 id="titolPrincipal">📮 El Cartero Invisible Setmana 7</h1>
 
+        <!-- BOTÓ PER CANVIAR EL TEMA -->
+        <button id="btnTema" type="button">
+             Tema fosc 🌙
+        </button>
+
+    </header>
 
     <!-- CONTINGUT PRINCIPAL -->
     <main class="contenidorPrincipal">
@@ -26,12 +31,10 @@
             <p>Benvingut al teu búzon virtual</p>
         </section>
 
-
         <!-- CONTENIDOR DE CARTES -->
         <section id="contenidorCartes">
             <p>Carregant cartes...</p>
         </section>
-
 
         <!-- BOTÓ PER SALUDAR -->
         <section class="contenidorBoton">
@@ -40,20 +43,17 @@
             </button>
         </section>
 
-
         <!-- BÚSTIA VIRTUAL -->
         <div id="buzon">
             📬
         </div>
 
-
-        <!-- AFegir CARTA DE PROVA -->
+        <!-- AFEGIR CARTA DE PROVA -->
         <section class="contenidorBoton">
             <button id="btnAfegirCarta" type="button">
                 Afegir carta de prova
             </button>
         </section>
-
 
         <!-- FORMULARI PER CREAR UNA CARTA -->
         <section id="seccioCrear">
@@ -63,34 +63,16 @@
             <form id="formCarta">
 
                 <label for="remitent">Remitent:</label>
-                <input
-                    type="text"
-                    id="remitent"
-                    name="remitent"
-                    required
-                >
+                <input type="text" id="remitent" name="remitent" required>
 
                 <label for="destinatari">Destinatari:</label>
-                <input
-                    type="text"
-                    id="destinatari"
-                    name="destinatari"
-                    required
-                >
+                <input type="text" id="destinatari" name="destinatari" required>
 
                 <label for="contingut">Contingut:</label>
-                <textarea
-                    id="contingut"
-                    name="contingut"
-                    required
-                ></textarea>
+                <textarea id="contingut" name="contingut" required></textarea>
 
                 <label for="personatge">Personatge:</label>
-                <input
-                    type="text"
-                    id="personatge"
-                    name="personatge"
-                >
+                <input type="text" id="personatge" name="personatge">
 
                 <button type="submit">
                     Crear carta
@@ -100,16 +82,12 @@
 
         </section>
 
-
         <!-- BOTÓ PER MOSTRAR LA TAULA -->
         <section class="contenidorBoton">
-
             <button id="btnMostrarTaula" type="button">
                 Mostrar taula
             </button>
-
         </section>
-
 
         <!-- TAULA DE CARTES -->
         <section id="seccioTaula" style="display: none;">
@@ -138,11 +116,7 @@
 
     </main>
 
-
-    <!-- ========================================= -->
-    <!-- FINESTRA MODAL PER EDITAR UNA CARTA       -->
-    <!-- ========================================= -->
-
+    <!-- FINESTRA MODAL PER EDITAR UNA CARTA -->
     <div
         id="modalEditar"
         class="modal"
@@ -164,22 +138,15 @@
                 &times;
             </button>
 
-
             <h2 id="titolModal">
                 Editar carta
             </h2>
 
-
             <!-- FORMULARI D'EDICIÓ -->
             <form id="formEditar">
 
-                <!-- ID DE LA CARTA QUE S'ESTÀ EDITANT -->
-                <input
-                    type="hidden"
-                    id="editarId"
-                    name="id"
-                >
-
+                <!-- ID DE LA CARTA -->
+                <input type="hidden" id="editarId" name="id">
 
                 <!-- REMITENT -->
                 <label for="editarRemitent">
@@ -193,7 +160,6 @@
                     required
                 >
 
-
                 <!-- DESTINATARI -->
                 <label for="editarDestinatari">
                     Destinatari:
@@ -206,7 +172,6 @@
                     required
                 >
 
-
                 <!-- CONTINGUT -->
                 <label for="editarContingut">
                     Contingut:
@@ -217,7 +182,6 @@
                     name="contingut"
                     required
                 ></textarea>
-
 
                 <!-- PERSONATGE -->
                 <label for="editarPersonatge">
@@ -230,21 +194,14 @@
                     name="personatge"
                 >
 
-
                 <!-- BOTONS DEL MODAL -->
                 <div class="modal-botons">
 
-                    <button
-                        type="submit"
-                        id="btnDesarEdicio"
-                    >
+                    <button type="submit" id="btnDesarEdicio">
                         Desar canvis
                     </button>
 
-                    <button
-                        type="button"
-                        id="btnCancelEditar"
-                    >
+                    <button type="button" id="btnCancelEditar">
                         Cancel·lar
                     </button>
 
@@ -256,7 +213,6 @@
 
     </div>
 
-
     <!-- INDICADOR DE CÀRREGA -->
     <p
         id="indicadorCarrega"
@@ -266,12 +222,10 @@
         Carregant...
     </p>
 
-
     <!-- PEU DE PÀGINA -->
     <footer>
         <p>© El Cartero Invisible</p>
     </footer>
-
 
     <!-- JAVASCRIPT -->
     <script type="module" src="script.js"></script>

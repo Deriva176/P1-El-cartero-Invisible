@@ -1,10 +1,27 @@
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 import json
 import os
-from fastapi.middleware.cors import CORSMiddleware
+
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL")
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 app = FastAPI()
+
+#Endpoint per obtenir la configuració del servidor
+@app.get("/config")
+def config():
+    return {
+        "debug": DEBUG,
+        "ia_configurada": GEMINI_API_KEY is not None and GEMINI_API_KEY != ""
+    }
+
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -77,7 +94,40 @@ class Carta(BaseModel):
 cartes = cargar_cartes()
 
 
-# **ENDPOINTS**
+# ****  ENDPOINTS  ****
+
+# Ruta principal
+@app.get("/")
+def root():
+    return {"missatge": "Hola, habibi!"}
+
+
+# Obtenir una carta per ID
+@app.get("/cartas/{id}")
+def obtenir_carta(id: int):
+
+    for c in cartes:
+        if c["id"] == id:
+            return c
+
+    raise HTTPException(
+        status_code=404,
+        detail="Carta no trobada"
+    )
+
+# Llistar cartes amb limit, offset i filtre per personatge
+@app.get("/cartas")
+def llistar_cartes(limit: int = 100, offset: int = 0, personatge: str = None):
+
+    if personatge:
+        cartesFiltrades = [
+            c for c in cartes
+            if c["personatge"] == personatge
+        ]
+    else:
+        cartesFiltrades = cartes
+
+    return cartesFiltrades[offset:offset + limit]
 
 # Crear una carta
 @app.post("/cartas", status_code=201)
@@ -100,6 +150,7 @@ def crear_carta(carta: Carta):
     # Retornem la carta creada
     return nova_carta
 
+
 # Editar una carta
 @app.put("/cartas/{id}")
 def actualizar_carta(id: int, carta_actualizada: Carta):
@@ -119,24 +170,7 @@ def actualizar_carta(id: int, carta_actualizada: Carta):
 
     raise HTTPException(status_code=404, detail="Carta no trobada")
 
-# Ruta principal
-@app.get("/")
-def root():
-    return {"missatge": "Hola, habibi!"}
 
-
-# Obtenir una carta per ID
-@app.get("/cartas/{id}")
-def obtenir_carta(id: int):
-
-    for c in cartes:
-        if c["id"] == id:
-            return c
-
-    raise HTTPException(
-        status_code=404,
-        detail="Carta no trobada"
-    )
 
 @app.delete("/cartas/{id}")
 def eliminar_carta(id: int):
@@ -150,19 +184,3 @@ def eliminar_carta(id: int):
         status_code=status.HTTP_404_NOT_FOUND,
         detail="Carta no trobada"
     )
-
-
-
-# Llistar cartes amb limit, offset i filtre per personatge
-@app.get("/cartas")
-def llistar_cartes(limit: int = 100, offset: int = 0, personatge: str = None):
-
-    if personatge:
-        cartesFiltrades = [
-            c for c in cartes
-            if c["personatge"] == personatge
-        ]
-    else:
-        cartesFiltrades = cartes
-
-    return cartesFiltrades[offset:offset + limit]

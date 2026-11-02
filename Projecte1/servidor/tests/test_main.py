@@ -199,3 +199,33 @@ async def test_update_carta_not_found():
         response = await ac.put("/cartas/999", json=payload)
         assert response.status_code == 404
 
+
+# TEST 12: Comprova que el endpoint GET /config retorna la configuració correcta i no exposa la clau secreta.
+@pytest.mark.asyncio
+async def test_config_no_exposa_la_clau(monkeypatch):
+    monkeypatch.setattr(main, "GEMINI_API_KEY", "clau_secreta_de_prova")
+
+    async with AsyncClient(
+        transport=ASGITransport(app=main.app),
+        base_url="http://test"
+    ) as ac:
+        response = await ac.get("/config")
+
+        assert response.status_code == 200
+        assert response.json()["ia_configurada"] is True
+        assert "clau_secreta_de_prova" not in response.text
+
+
+# TEST 13: Comprova que el endpoint GET /config retorna ia_configurada com a False quan la clau no està configurada.
+@pytest.mark.asyncio
+async def test_config_sense_clau(monkeypatch):
+    monkeypatch.setattr(main, "GEMINI_API_KEY", None)
+
+    async with AsyncClient(
+        transport=ASGITransport(app=main.app),
+        base_url="http://test"
+    ) as ac:
+        response = await ac.get("/config")
+
+        assert response.status_code == 200
+        assert response.json()["ia_configurada"] is False

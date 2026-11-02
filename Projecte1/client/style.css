@@ -1,223 +1,224 @@
-/* Aplica el border-box a todos els elements */
 * {
     box-sizing: border-box;
 }
 
-/* Cos de la pàgina */
+/* =========================================
+   PALETA DE COLORS
+   ========================================= */
+
+:root {
+    --color-principal: #2479b5;
+    --color-secundario: #086564;
+    --color-fondo: #f4f6f9;
+    --color-texto: #2c3e50;
+    --color-texto-secundario: #526579;
+    --color-tarjeta: #9accd5;
+    --color-borde: #e1e8ef;
+    --color-blanco: #ffffff;
+    --color-error: #c0392b;
+    --color-exito: #27ae60;
+    --color-oscuro: #18212b;
+    --color-superficie-oscura: #263544;
+}
+
+
 body {
-    background-color: #f4f1ea;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
     font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    color: #2c3e50;
-    display: flex;
-    flex-direction: column;
+    line-height: 1.5;
 }
 
-/* Capçalera */
+/* CAPÇALERA */
 header {
-    max-width: 1000px;
-    margin: 20px auto 30px;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    margin: 25px auto 15px;
     text-align: center;
 }
 
-/* Títol principal */
+
 h1 {
-    color: #2c3e50;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     margin: 0;
+    color: var(--color-principal);
+    transition: color 0.2s ease;
 }
 
-/* Efecte en passar el ratolí pel títol */
 h1:hover {
-    color: #e74c3c;
+    color: var(--color-secundario);
 }
 
-/* Contenidor principal */
+/* CONTENIDOR PRINCIPAL */
 .contenidorPrincipal {
-    max-width: 1000px;
     width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 30px;
+    padding: 15px 24px;
 }
 
-/* Text de benvinguda */
+/* TEXT INFORMATIU */
 .info {
+    font-size: 1.05rem;
     text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 25px;
-    color: #2c3e50;
+    margin: 0 auto 20px;
+    color: #526579;
+    max-width: 800px;
 }
 
-/* Seccions */
+/* SECCIONS */
 section {
-    margin: 20px 0;
-    padding: 16px;
+    margin: 15px 0;
+    padding: 12px 0;
 }
 
-/* Primera secció */
 section:first-child {
-    border-left: 4px solid #2c3e50;
+    border-left: 4px solid #3498db;
+    padding-left: 16px;
 }
 
-/* Contenidor de cartes */
+/* =========================================
+   CARTES
+   ========================================= */
+
 #contenidorCartes {
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 20px;
+    background-position: #1b6395;
+    gap: 70px;
     row-gap: 15px;
-    margin-top: 20px;
-}
-
-/* Carta */
-.carta {
-    border: 1px solid #ccc;
-    padding: 2rem;
-    margin: 1em auto;
     width: 100%;
+    padding: 0;
+    align-items: stretch;
+}
+
+/* DISSENY DE CADA CARTA */
+.carta {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    min-height: 140px;
+    margin: 0;
+    padding: 20px 22px;
+    background-color: #9accd5;
+    border: 1px solid #e1e8ef;
+    border-left: 5px solid #628196;
     border-radius: 12px;
-    background-color: #b7daf2;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 3px 10px rgba(51, 72, 92, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    overflow-wrap: anywhere;
 }
 
-/* Títol de la carta */
-.carta h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: #2c3e50;
+/* SOBRE DECORATIU A CADA CARTA */
+.carta::before {
+    content: "✉️";
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 24px;
 }
 
-/* Text de la carta */
-.carta p {
-    margin-bottom: 0;
-    font-size: 1.05rem;
-    line-height: 1.6;
-}
-
-/* Efecte en passar el ratolí per la carta */
+/* EFECTE EN PASSAR EL RATOLI */
 .carta:hover {
     transform: translateY(-3px);
-    box-shadow: 0 40px 30px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.12);
+    border-left-color: #086564;
 }
 
-/* Cartes pendents */
+/* TITOL DE LES CARTES */
+.carta h3 {
+    font-size: 1.15rem;
+    margin: 0 0 8px;
+    color: #243b53;
+}
+
+/* TEXT DE LES CARTES */
+.carta p {
+    font-size: 0.96rem;
+    line-height: 1.5;
+    margin: 0;
+    color: #0b1f29;
+}
+
+/* MISSATGE QUAN NO HI HA CARTES */
 #contenidorCartes > p {
     text-align: center;
     font-weight: bold;
-    margin-top: 50px;
+    margin: 20px 0;
 }
 
-/* Botó per afegir */
+/* =========================================
+   BOTONS
+   ========================================= */
+
+button {
+    font-family: inherit;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* BOTÓ AFEGIR */
 #btnAfegir {
-    background-color: #3498db;
-    color: rgb(255, 251, 183);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-/* Bústia */
-#buzon {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #c9dfaa;
+    background-color: #2479b5;
     color: white;
-    padding: 16px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-#buzon:hover {
-    background: #9eda6c;
+#btnAfegir:hover {
+    background-color: #1b6395;
 }
 
-/* Botó saludar */
+/* BOTÓ SALUDAR */
 #btnSaluda {
     display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 1rem;
     background-color: #086564;
-    color: #ffffff;
+    color: white;
     border: none;
-    border-radius: 5px;
+    padding: 11px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
+    margin: 12px auto;
 }
 
-/* Botons centrats */
+#btnSaluda:hover {
+    background-color: #064d4c;
+}
+
+/* CONTENIDOR DELS BOTONS */
 .contenidorBoton {
     text-align: center;
-    margin: 15px 0;
+    margin: 12px 0;
 }
 
-/* Títol de la taula */
-#seccioTaula h2 {
-    text-align: center;
-    color: #2c3e50;
-}
-
-/* Contenidor de la taula */
-#seccioTaula {
-    margin-top: 25px;
-    padding: 16px;
-    overflow-x: auto;
-}
-
-/* Taula de cartes */
-#taulaCartes {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-}
-
-/* Capçalera i cel·les */
-#taulaCartes th,
-#taulaCartes td {
-    border: 1px solid #ccc;
-    padding: 12px;
-    text-align: left;
-}
-
-/* Capçalera de la taula */
-#taulaCartes th {
-    background-color: #34495e;
+/* BOTÓ EDITAR */
+.btn-editar {
+    background-color: #54758e;
     color: white;
-}
-
-/* Colors alterns de les files */
-#taulaCartes tbody tr:nth-child(even) {
-    background-color: #e8f2f8;
-}
-
-#taulaCartes tbody tr:nth-child(odd) {
-    background-color: #ffffff;
-}
-
-/* Efecte en passar el ratolí per una fila */
-#taulaCartes tbody tr:hover {
-    background-color: #d4e6f1;
-}
-
-/* Resum del contingut */
-.contingut-cell {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 200px;
-}
-
-/* Botó d'eliminar de la taula */
-.btn-eliminar-taula {
-    background-color: #e74c3c;
-    color: white;
-    padding: 6px 10px;
     border: none;
-    border-radius: 5px;
+    padding: 8px 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.btn-editar:hover {
+    background-color: #36566f;
+}
+
+/* BOTÓ ELIMINAR */
+.btn-eliminar,
+.btn-eliminar-taula {
+    background-color: #ab2112d6;
+    color: white;
+    padding: 8px 13px;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
 }
 
@@ -225,11 +226,108 @@ section:first-child {
     background-color: #c0392b;
 }
 
+/* BOTONS DESACTIVATS */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 /* =========================================
-   FINESTRA MODAL PER EDITAR UNA CARTA
+   TAULA DE CARTES
    ========================================= */
 
-/* Fons fosc que cobreix tota la pantalla */
+#seccioTaula {
+    margin-top: 25px;
+    padding: 16px 0;
+    overflow-x: auto;
+}
+
+#seccioTaula h2 {
+    text-align: left;
+    color: #243b53;
+    margin-bottom: 16px;
+}
+
+#taulaCartes {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(44, 62, 80, 0.06);
+}
+
+/* CEL·LES DE LA TAULA */
+#taulaCartes th,
+#taulaCartes td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e7edf2;
+}
+
+/* CAPÇALERA DE LA TAULA */
+#taulaCartes th {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: 600;
+}
+
+/* FILES ALTERNES */
+#taulaCartes tbody tr:nth-child(even) {
+    background-color: #f3f7fa;
+}
+
+#taulaCartes tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* EFECTE EN PASSAR EL RATOLI */
+#taulaCartes tbody tr:hover {
+    background-color: #e6f2fa;
+}
+
+/* RESUM DEL CONTINGUT */
+.contingut-cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+}
+
+/* =========================================
+   BÚSTIA
+   ========================================= */
+
+#buzon {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    background-color: #a4c3c2;
+    color: white;
+    padding: 13px 17px;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+/* SEGELL DECORATIU AL BUZÓN */
+#buzon::after {
+    content: "😶‍🌫️";
+    position: absolute;
+    top: -12px;
+    right: -10px;
+    font-size: 25px;
+    transform: rotate(15deg);
+}
+
+#buzon:hover {
+    background-color: #064d4c;
+}
+
+/* =========================================
+   FINESTRA MODAL
+   ========================================= */
+
 .modal {
     display: none;
     position: fixed;
@@ -244,24 +342,24 @@ section:first-child {
     overflow-y: auto;
 }
 
-/* Contingut de la finestra modal */
+/* CONTINGUT DEL MODAL */
 .modal-contingut {
-    background-color: white;
+    background-color: rgb(172, 211, 223);
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
     margin: auto;
-    padding: 30px;
-    border-radius: 12px;
+    padding: 25px;
+    border-radius: 14px;
     position: relative;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     animation: aparicioModal 0.25s ease-out;
 }
 
-/* Animació d'entrada del modal */
+/* ANIMACIÓ DEL MODAL */
 @keyframes aparicioModal {
     from {
         opacity: 0;
-        transform: translateY(-0px);
+        transform: translateY(-10px);
     }
 
     to {
@@ -270,55 +368,49 @@ section:first-child {
     }
 }
 
-/* Títol del modal */
+/* TITOL DEL MODAL */
 .modal-contingut h2 {
     color: #2c3e50;
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 25px;
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
-/* Etiquetes del formulari */
+/* ETIQUETES DEL FORMULARI */
 .modal-contingut label {
     display: block;
     margin-top: 12px;
     margin-bottom: 6px;
-    font-weight: normal;
+    font-weight: 500;
 }
 
-/* Camps del formulari */
+/* CAMPS DEL FORMULARI */
 .modal-contingut input,
 .modal-contingut textarea {
     display: block;
     width: 100%;
-
     padding: 10px;
-
-    border: 1px solid #7f9eb4;
+    border: 1px solid #b8c8d6;
     border-radius: 6px;
-
     font-size: 16px;
-    font-family: sans-serif;
+    font-family: inherit;
 }
 
-/* Camp de contingut */
+/* ÀREA DE TEXT */
 .modal-contingut textarea {
     min-height: 120px;
     resize: vertical;
 }
 
-/* Botó de tancar */
+/* BOTÓ TANCAR */
 .tancar-modal {
     position: absolute;
     top: 10px;
     right: 15px;
-
     border: none;
     background: none;
-
     font-size: 28px;
     color: #2c3e50;
-
     cursor: pointer;
 }
 
@@ -326,25 +418,23 @@ section:first-child {
     color: #e74c3c;
 }
 
-/* Botons inferiors */
+/* BOTONS DEL MODAL */
 .modal-botons {
     display: flex;
-    gap: 10px;
-    margin-top: 25px;
+    gap: 12px;
+    margin-top: 20px;
 }
 
 .modal-botons button {
     flex: 1;
     padding: 12px;
-
     border: none;
     border-radius: 6px;
-
     cursor: pointer;
     font-size: 15px;
 }
 
-/* Botó desar canvis */
+/* BOTÓ DESAR CANVIS */
 #btnDesarEdicio {
     background-color: #27ae60;
     color: white;
@@ -354,7 +444,7 @@ section:first-child {
     background-color: #219150;
 }
 
-/* Botó cancel·lar */
+/* BOTÓ CANCEL·LAR */
 #btnCancelEditar {
     background-color: #e74c3c;
     color: white;
@@ -364,56 +454,256 @@ section:first-child {
     background-color: #c0392b;
 }
 
-/* Botó editar de les cartes */
-.btn-editar {
-    background-color: #5d798d;
+/* =========================================
+   BOTÓ CANVIAR TEMA
+   ========================================= */
+
+#btnTema {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background-color: #2c3e50;
     color: white;
-
     border: none;
-    padding: 8px 14px;
-    border-radius: 5px;
+    padding: 10px 16px;
+    border-radius: 8px;
     cursor: pointer;
-    margin-right: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
 }
 
-.btn-editar:hover {
-    background-color: #2980b9;
+#btnTema:hover {
+    background-color: #3498db;
 }
 
-/* Botons desactivats */
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+/* =========================================
+   TEMA FOSC
+   ========================================= */
+
+body.tema-fosc {
+    background-color: #18212b;
+    color: #ecf0f1;
 }
 
-/* Adaptació a pantalles petites */
-@media (max-width: 500px) {
-    .modal-contingut {
-        padding: 20px;
-    }
+/* Títols */
+body.tema-fosc h1,
+body.tema-fosc h2,
+body.tema-fosc h3 {
+    color: #ecf0f1;
+}
 
-    .modal-botons {
-        flex-direction: column;
+/* Text informatiu */
+body.tema-fosc .info {
+    color: #bdc3c7;
+}
+
+/* Seccions */
+body.tema-fosc section:first-child {
+    border-left-color: #5dade2;
+}
+
+/* Cartes */
+body.tema-fosc .carta {
+    background-color: #263544;
+    color: #ecf0f1;
+    border-color: #40566b;
+    border-left-color: #3498db;
+}
+
+body.tema-fosc .carta h3 {
+    color: #5dade2;
+}
+
+body.tema-fosc .carta p {
+    color: #d5dce3;
+}
+
+/* Taula */
+body.tema-fosc #taulaCartes {
+    background-color: #263544;
+    color: white;
+}
+
+body.tema-fosc #taulaCartes th {
+    background-color: #102a43;
+    color: white;
+}
+
+body.tema-fosc #taulaCartes td {
+    border-color: #40566b;
+}
+
+body.tema-fosc #taulaCartes tbody tr:nth-child(even) {
+    background-color: #304355;
+}
+
+body.tema-fosc #taulaCartes tbody tr:nth-child(odd) {
+    background-color: #263544;
+}
+
+body.tema-fosc #taulaCartes tbody tr:hover {
+    background-color: #40566b;
+}
+
+/* Títol de la taula */
+body.tema-fosc #seccioTaula h2 {
+    color: #ecf0f1;
+}
+
+/* Peu de pàgina */
+body.tema-fosc footer {
+    color: #bdc3c7;
+}
+
+/* Botó canviar tema */
+body.tema-fosc #btnTema {
+    background-color: #f1c40f;
+    color: #2c3e50;
+}
+
+body.tema-fosc #btnTema:hover {
+    background-color: #f39c12;
+}
+
+/* Modal */
+body.tema-fosc .modal-contingut {
+    background-color: #263544;
+    color: white;
+}
+
+body.tema-fosc .modal-contingut h2 {
+    color: #ecf0f1;
+}
+
+body.tema-fosc .modal-contingut input,
+body.tema-fosc .modal-contingut textarea {
+    background-color: #18212b;
+    color: white;
+    border-color: #526579;
+}
+
+body.tema-fosc .modal-contingut label {
+    color: #ecf0f1;
+}
+
+/* Bústia */
+body.tema-fosc #buzon {
+    background-color: #304355;
+    color: white;
+}
+
+
+
+/* =========================================
+   ADAPTACIÓ A MÒBILS
+   ========================================= */
+
+/* MÒBIL: fins a 768px */
+@media (max-width: 768px) {
+
+    /* Contenidor principal */
+    body {
+        padding: 10px;
     }
 
     #contenidorCartes {
-        grid-template-columns: 1fr;
-        column-gap: 0;
+        max-width: 100%;
+        padding: 10px;
     }
 
-    .contenidorPrincipal {
-        padding: 15px;
+    /* Les cartes ocupen tot l'ample */
+    #contenidorCartes {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .carta {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Bústia a la part inferior */
+    #buzon {
+        right: 15px;
+        bottom: 15px;
+        top: auto;
+        width: 65px;
+        height: 65px;
+        font-size: 12px;
+    }
+
+    /* Formulari */
+    form {
+        width: 100%;
+    }
+
+    form input,
+    form textarea,
+    form select,
+    form button {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    /* Evitem que la bústia tapi el contingut */
+    body {
+        padding-bottom: 90px;
     }
 }
 
+
+/* TAULETA: entre 769px i 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    /* Contenidor principal */
+    #contenidorCartes {
+        max-width: 900px;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .carta {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #buzon {
+        right: 20px;
+        bottom: 20px;
+    }
+}
+
+
+/* ESCRIPTORI: a partir de 1025px */
+@media (min-width: 1025px) {
+
+    /* Contenidor principal */
+      .contenidorPrincipal {
+        max-width: 1400px;
+        padding: 15px 30px;
+    }
+
+    #contenidorCartes {
+        width: 100%;
+        max-width: none;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+        padding: 0;
+    }
+}
 /* =========================================
    PEU DE PÀGINA
    ========================================= */
 
 footer {
-    max-width: 1000px;
-    width: 100%;
-    margin: 50px auto 20px;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    margin: 25px auto 15px;
     text-align: center;
-    color: #156e9e;
+    color: #64788b;
+    font-size: 0.9rem;
 }

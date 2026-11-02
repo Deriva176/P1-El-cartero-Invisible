@@ -252,10 +252,90 @@ function renderitzarTaula(cartes) {
     });
 }
 
+// NUEVO: Recupera el tema guardado y activa el tema oscuro al cargar la página.
+export function aplicarTemaGuardat() {
+    if (localStorage.getItem("tema") === "fosc") {
+        document.body.classList.add("tema-fosc");
+    }
+}
+
+
+// NUEVO: Cambia entre tema claro y oscuro y guarda la preferencia.
+export function canviarTema() {
+    document.body.classList.toggle("tema-fosc");
+
+    const esFosc = document.body.classList.contains("tema-fosc");
+
+    localStorage.setItem("tema", esFosc ? "fosc" : "clar");
+}
+
+
+// NUEVO: Guarda el último personaje seleccionado en localStorage.
+export function guardarUltimPersonatge(personatge) {
+    console.log("Guardando personaje:", personatge);
+    localStorage.setItem("ultimPersonatge", personatge);
+}
+
+
+// NUEVO: Recupera el último personaje seleccionado y lo coloca en el formulario.
+export function preomplirUltimPersonatge() {
+    const ultim = localStorage.getItem("ultimPersonatge");
+
+    if (ultim) {
+        document.querySelector("#personatge").value = ultim;
+    }
+}
+
+
+// NUEVO: Guarda automáticamente el texto de la carta en sessionStorage.
+export function guardarCartaEnProces(text) {
+    sessionStorage.setItem("cartaEnProces", text);
+}
+
+
+// NUEVO: Recupera el borrador de la carta cuando se carga la página.
+export function recuperarCartaEnProces() {
+    const text = sessionStorage.getItem("cartaEnProces");
+
+    if (text) {
+        document.querySelector("#contingut").value = text;
+    }
+}
+
 
 // Funció d'inicialització
 function inicialitzar() {
     console.log("✅ LA FUNCIÓN INICIALITZAR SE HA EJECUTADO");
+
+        // NUEVO: Aplicar el tema guardado al cargar la página.
+    aplicarTemaGuardat();
+
+    const btnTema = document.querySelector("#btnTema");
+
+    if (btnTema) {
+        btnTema.addEventListener("click", canviarTema);
+    }
+
+    
+
+    // NUEVO: Recuperar el último personaje seleccionado.
+    preomplirUltimPersonatge();
+
+    // NUEVO: Recuperar el borrador de la carta.
+    recuperarCartaEnProces();
+
+
+    
+
+
+    // NUEVO: Guardar automáticamente el texto de la carta mientras se escribe.
+    const campoContingut = document.querySelector("#contingut");
+
+    if (campoContingut) {
+        campoContingut.addEventListener("input", (e) => {
+            guardarCartaEnProces(e.target.value);
+        });
+    }   
 
 
     // Botó per mostrar o amagar la taula
@@ -333,7 +413,7 @@ function inicialitzar() {
     const titol = document.querySelector("#titolPrincipal");
 
     if (titol) {
-        titol.textContent = "📮 El Cartero Invisible – Setmana 2";
+        titol.textContent = "📮 El Cartero Invisible – Setmana 7";
         titol.setAttribute("data-role", "banner");
     }
 
@@ -517,7 +597,20 @@ function inicialitzar() {
                     throw new Error(`Error HTTP: ${response.status}`);
                 }
 
+
+            // NUEVO: Guardar el último personaje seleccionado después de enviar la carta correctamente.
+                if (personatge) {
+                    guardarUltimPersonatge(personatge);
+                }
+
+
+            // NUEVO: Eliminar el borrador porque la carta ya se ha enviado correctamente.
+                sessionStorage.removeItem("cartaEnProces");
+
+
                 formCarta.reset();
+
+                preomplirUltimPersonatge();
 
                 await carregarCartes();
 
@@ -658,6 +751,11 @@ function inicialitzar() {
         });
     }
 }
+
+
+//////////////////////////
+// CANVI DE TEMA CLAR / FOSC //
+//////////////////////////
 
 
 //////////////////////////
